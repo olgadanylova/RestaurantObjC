@@ -253,43 +253,33 @@
                                                 <constraint firstAttribute="height" constant="75" id="vNw-v7-Xd5"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G21-0K-91L">
-                                            <rect key="frame" x="98" y="28" width="308" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq2-CX-QcA">
-                                            <rect key="frame" x="98" y="51" width="308" height="14.666666666666671"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZC-cW-yso">
-                                            <rect key="frame" x="98" y="5" width="308" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            <rect key="frame" x="99" y="8" width="299" height="45.666666666666664"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G21-0K-91L">
+                                            <rect key="frame" x="99" y="61.666666666666657" width="299" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="zYW-AZ-EpX" firstAttribute="leading" secondItem="iuc-OK-3Hg" secondAttribute="leading" constant="8" id="7cU-X1-0hD"/>
-                                        <constraint firstItem="IZC-cW-yso" firstAttribute="leading" secondItem="zYW-AZ-EpX" secondAttribute="trailing" constant="15" id="AIO-SO-tcw"/>
-                                        <constraint firstAttribute="trailing" secondItem="Mq2-CX-QcA" secondAttribute="trailing" constant="8" id="ATC-Ic-VRB"/>
-                                        <constraint firstItem="G21-0K-91L" firstAttribute="leading" secondItem="zYW-AZ-EpX" secondAttribute="trailing" constant="15" id="JxS-zg-4l2"/>
-                                        <constraint firstItem="Mq2-CX-QcA" firstAttribute="leading" secondItem="zYW-AZ-EpX" secondAttribute="trailing" constant="15" id="KEC-KI-mLc"/>
-                                        <constraint firstAttribute="trailing" secondItem="G21-0K-91L" secondAttribute="trailing" constant="8" id="Re7-Oz-fgE"/>
+                                        <constraint firstItem="IZC-cW-yso" firstAttribute="top" secondItem="iuc-OK-3Hg" secondAttribute="top" constant="8" id="D5S-v6-loR"/>
+                                        <constraint firstItem="G21-0K-91L" firstAttribute="top" secondItem="IZC-cW-yso" secondAttribute="bottom" constant="8" id="KHe-zw-nye"/>
                                         <constraint firstItem="zYW-AZ-EpX" firstAttribute="centerY" secondItem="iuc-OK-3Hg" secondAttribute="centerY" id="Uel-xa-CcR"/>
-                                        <constraint firstItem="IZC-cW-yso" firstAttribute="top" secondItem="iuc-OK-3Hg" secondAttribute="top" constant="5" id="WYl-fL-wa9"/>
-                                        <constraint firstAttribute="bottom" secondItem="Mq2-CX-QcA" secondAttribute="bottom" constant="22" id="eBj-lI-12m"/>
-                                        <constraint firstAttribute="trailing" secondItem="IZC-cW-yso" secondAttribute="trailing" constant="8" id="emM-mj-Yfy"/>
-                                        <constraint firstItem="G21-0K-91L" firstAttribute="top" secondItem="IZC-cW-yso" secondAttribute="bottom" constant="5" id="jrC-HY-drW"/>
-                                        <constraint firstItem="Mq2-CX-QcA" firstAttribute="top" secondItem="G21-0K-91L" secondAttribute="bottom" constant="5" id="n45-GN-1fr"/>
+                                        <constraint firstAttribute="trailing" secondItem="G21-0K-91L" secondAttribute="trailing" constant="16" id="XBO-Sb-weg"/>
+                                        <constraint firstItem="IZC-cW-yso" firstAttribute="leading" secondItem="zYW-AZ-EpX" secondAttribute="trailing" constant="16" id="hyb-Gj-da8"/>
+                                        <constraint firstAttribute="bottom" secondItem="G21-0K-91L" secondAttribute="bottom" constant="8" id="jzR-84-OVp"/>
+                                        <constraint firstAttribute="trailing" secondItem="IZC-cW-yso" secondAttribute="trailing" constant="16" id="lyG-EX-oHK"/>
+                                        <constraint firstItem="G21-0K-91L" firstAttribute="leading" secondItem="zYW-AZ-EpX" secondAttribute="trailing" constant="16" id="ubq-FC-pE0"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="description2Label" destination="Mq2-CX-QcA" id="P5I-O0-AIB"/>
-                                    <outlet property="descriptionLabel" destination="G21-0K-91L" id="VF4-7l-MTx"/>
+                                    <outlet property="descriptionLabel" destination="G21-0K-91L" id="iQt-5C-7dJ"/>
                                     <outlet property="pictureView" destination="zYW-AZ-EpX" id="MeJ-2S-SAq"/>
                                     <outlet property="titleLabel" destination="IZC-cW-yso" id="5GS-vx-ocW"/>
                                     <segue destination="kSD-3D-1ik" kind="show" identifier="ShowItemDetails" id="0SM-Mr-hxg"/>
@@ -348,7 +338,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIC-bZ-7Zn">
                                             <rect key="frame" x="8" y="72" width="398" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -470,11 +460,11 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem title="Add to cart" id="4vI-bw-3Ql">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="7SE-w5-65j"/>
                         <barButtonItem title="Add to favorites" id="tmO-W8-sxU">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="UU8-iu-cA3">
@@ -539,10 +529,8 @@
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gft-1N-DFW">
+                    <toolbar key="toolbar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gft-1N-DFW">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="jnP-OW-HKA" kind="relationship" relationship="rootViewController" id="fcf-8Y-Hwf"/>

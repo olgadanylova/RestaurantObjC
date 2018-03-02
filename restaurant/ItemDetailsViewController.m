@@ -23,8 +23,8 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
     
-    NSDictionary *barButtonAppearanceDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0] , NSForegroundColorAttributeName: [UIColor whiteColor]};
-    [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
+//    NSDictionary *barButtonAppearanceDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0] , NSForegroundColorAttributeName: [UIColor whiteColor]};
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
     
     if ([self.item isKindOfClass:[MenuItem class]]) {
         menuItem = self.item;

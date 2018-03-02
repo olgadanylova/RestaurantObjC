@@ -30,6 +30,7 @@
     if ([self.items.firstObject isKindOfClass:[MenuItem class]]) {
         MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];
         cell.titleLabel.text = menuItem.title;
+        cell.descriptionLabel.text = menuItem.body;
         Picture *picture = menuItem.pictures.firstObject;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
