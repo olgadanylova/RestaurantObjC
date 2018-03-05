@@ -385,8 +385,8 @@
 		0F7A632E1E769BB6007B6B07 /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				5ABE8AAA2045BC9E00211CF5 /* Cells */,
 				5ABE8A702045926F00211CF5 /* Data */,
+				5ABE8AAA2045BC9E00211CF5 /* Cells */,
 				5ABE8A51204558A000211CF5 /* View Controllers */,
 				0F7A63321E769BB6007B6B07 /* AppDelegate.h */,
 				0F7A63331E769BB6007B6B07 /* AppDelegate.m */,

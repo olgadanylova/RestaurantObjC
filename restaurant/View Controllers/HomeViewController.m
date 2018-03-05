@@ -14,6 +14,7 @@
 #define LOGOUT @"← Logout"
 #define ARTICLES @"📰 Articles"
 
+
 @interface HomeViewController() {
     NSArray *favoritesAndCart;
     NSMutableArray *categories;
@@ -108,22 +109,43 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [self performSegueWithIdentifier:@"ShowItems" sender:cell];
+        }
+        else if (indexPath.row == 1) {
+            // shopping cart
+        }
+    }
+    else if (indexPath.section == 1 || indexPath.section == 2) {
+        [self performSegueWithIdentifier:@"ShowItems" sender:cell];
+    }
+    else if (indexPath.section == 3 && [cell.textLabel.text isEqualToString:LOGOUT]) {
+        [self performSegueWithIdentifier:@"unwindToLoginVC" sender:cell];
+    }
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UITableViewCell *cell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    if (indexPath.section == 0 && [segue.identifier isEqualToString:@""]) {
-        
+    if (indexPath.section == 0) {
+        UINavigationController *navController = [segue destinationViewController];
+        ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
+        itemsVC.navigationItem.title = @"Favorites";
     }
     
-    else if (indexPath.section == 1 && [segue.identifier isEqualToString:@"ShowItems"]) {
+    else if (indexPath.section == 1) {
         NSString *categoryName = [cell.textLabel.text substringFromIndex:2];
         DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
         [queryBuilder setWhereClause:[NSString stringWithFormat:@"category.title='%@'", categoryName]];
+        UINavigationController *navController = [segue destinationViewController];
+        ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
+        itemsVC.navigationItem.title = categoryName;
         [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
-            UINavigationController *navController = [segue destinationViewController];
-            ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
-            itemsVC.navigationItem.title = categoryName;
             itemsVC.items = menuItems;
             [itemsVC.tableView reloadData];
         } error:^(Fault *fault) {
@@ -131,9 +153,9 @@
         }];
     }
     
-    else if (indexPath.section == 2 && [segue.identifier isEqualToString:@"ShowItems"]) {
+    else if (indexPath.section == 2) {
         [[backendless.data of:[Article class]] find:^(NSArray *articles) {
-            UINavigationController *navController = [segue destinationViewController];          
+            UINavigationController *navController = [segue destinationViewController];
             ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
             itemsVC.navigationItem.title = @"News";
             itemsVC.items = articles;
@@ -142,25 +164,6 @@
             
         }];
     }
-    
-    else if (indexPath.section == 3 && [cell.textLabel.text isEqualToString:LOGOUT]) {
-        [self performSegueWithIdentifier:@"unwindToLoginVC" sender:self];
-    }
-}
-
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    UITableViewCell *cell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    if ((indexPath.section == 1 || indexPath.section == 2) && [identifier isEqualToString:@"ShowItems"]) {
-        return YES;
-    }
-    
-    if (indexPath.section == 3) {
-        return YES;
-    }
-    
-    return NO;
 }
 
 @end

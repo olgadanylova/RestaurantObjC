@@ -7,6 +7,10 @@
 #import "Article.h"
 #import "MenuItem.h"
 
+#define ADD_TO_FAV @"Add to favorites"
+#define REMOVE_FROM_FAV @"Remove from favorites"
+
+
 @interface ItemDetailsViewController() {
     MenuItem *menuItem;
     NSArray *menuItemOptions;
@@ -23,20 +27,28 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
     
-//    NSDictionary *barButtonAppearanceDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0] , NSForegroundColorAttributeName: [UIColor whiteColor]};
-//    [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
-    
     if ([self.item isKindOfClass:[MenuItem class]]) {
         menuItem = self.item;
         menuItemOptions = menuItem.standardOptions;
         menuItemExtras = menuItem.extraOptions;
         menuItemPrices = menuItem.prices;
+        
+        if ([[helper getFavoriteObjectIds] containsObject:menuItem.objectId]) {
+            self.favoritesButton.title = REMOVE_FROM_FAV;
+        }
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
     else if ([self.item isKindOfClass:[Article class]]) {
         article = self.item;
         [self.navigationController setToolbarHidden:YES animated:YES];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath* idx = [NSIndexPath indexPathForRow:0 inSection:4];
+    [_table selectRowAtIndexPath:idx animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    [self tableView:_table didSelectRowAtIndexPath:idx];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -103,13 +115,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 200;
-    }    
+    }
     return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ItemImageCell"];        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ItemImageCell"];
+        cell.userInteractionEnabled = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"waitingImage.png"]];
         if ([self.item isKindOfClass:[MenuItem class]]) {
             Picture *picture = menuItem.pictures.firstObject;            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
@@ -133,6 +148,8 @@
     
     else if (indexPath.section == 1) {
         ItemInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemInfoCell" forIndexPath:indexPath];
+        cell.userInteractionEnabled = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([self.item isKindOfClass:[MenuItem class]]) {
             cell.titleLabel.text = menuItem.title;
             
@@ -154,24 +171,61 @@
     
     else if (indexPath.section == 2) {
         OptionsAndExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionCell" forIndexPath:indexPath];
-        cell.optionLabel.text = ((StandardOption *)[menuItemOptions objectAtIndex:indexPath.row]).name;
-        [cell.selectedSwitch setOn:YES];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.menuItem = menuItem;
+        StandardOption *option = [menuItemOptions objectAtIndex:indexPath.row];
+        cell.optionLabel.text = option.name;
+        [cell.selectedSwitch setOn:[option.selected boolValue]];
         return cell;
     }
     
     else if (indexPath.section == 3) {
         OptionsAndExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExtraCell" forIndexPath:indexPath];
-        cell.optionLabel.text = ((ExtraOption *)[menuItemExtras objectAtIndex:indexPath.row]).name;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.menuItem = menuItem;
+        ExtraOption *extra = [menuItemExtras objectAtIndex:indexPath.row];
+        cell.optionLabel.text = extra.name;
+        [cell.selectedSwitch setOn: [extra.selected boolValue]];
         return cell;
     }
     
     else if (indexPath.section == 4) {
         SizeAndPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SizeAndPriceCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Price *price = [menuItemPrices objectAtIndex:indexPath.row];
         cell.sizeAndPriceLabel.text = [NSString stringWithFormat:@"%@: $%@", price.name, price.value];
         return cell;
     }
     return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 4) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 4) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+- (IBAction)pressedAddToCart:(id)sender {
+    NSLog(@"Menu item: %@", menuItem);
+}
+
+- (IBAction)pressedAddToFavorites:(id)sender {
+    if ([self.favoritesButton.title isEqualToString:ADD_TO_FAV]) {
+        self.favoritesButton.title = REMOVE_FROM_FAV;
+        [helper addObjectIdToFavorites:menuItem.objectId];
+    }
+    else {
+        self.favoritesButton.title = ADD_TO_FAV;
+        [helper removeObjectIdFromFavorites:menuItem.objectId];
+    }
 }
 
 @end

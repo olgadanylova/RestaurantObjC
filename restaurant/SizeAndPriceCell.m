@@ -5,7 +5,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.selectionStyle = UITableViewCellSelectionStyleDefault;    
 }
 
 - (UIEdgeInsets)layoutMargins {

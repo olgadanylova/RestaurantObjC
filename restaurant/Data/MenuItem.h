@@ -17,14 +17,15 @@
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) NSString *ownerId;
 @property (nonatomic, strong) Category *category;
-                        
 @property (nonatomic, strong) NSMutableArray *extraOptions;
 @property (nonatomic, strong) NSMutableArray *tags;
 @property (nonatomic, strong) NSMutableArray *prices;
 @property (nonatomic, strong) NSMutableArray *pictures;
-@property (nonatomic, strong) Picture *thumb;
-                        
+@property (nonatomic, strong) Picture *thumb;                        
 @property (nonatomic, strong) NSMutableArray *standardOptions;
+
+- (void) encodeWithCoder : (NSCoder *)encode ;
+- (id) initWithCoder : (NSCoder *)decode;
               
 @end
             

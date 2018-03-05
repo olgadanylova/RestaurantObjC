@@ -4,6 +4,8 @@
 #import "ItemCell.h"
 #import "MenuItem.h"
 #import "Article.h"
+#import "Backendless.h"
+#import "Helper.h"
 
 @implementation ItemsViewController
 
@@ -13,7 +15,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
+        [self getFavoriteItems];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -55,12 +62,47 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];       
+        [helper removeObjectIdFromFavorites:menuItem.objectId];
+        [self getFavoriteItems];
+    }
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowItemDetails"]) {
         ItemDetailsViewController *itemDetailsVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         itemDetailsVC.item = [self.items objectAtIndex:indexPath.row];
-    }   
+    }
 }
+
+-(void)getFavoriteItems {
+    NSArray *favoriteObjectIds = [helper getFavoriteObjectIds];
+    if ([favoriteObjectIds count] > 0) {
+        NSString *whereClause = @"";
+        for (NSString *objectId in favoriteObjectIds) {
+            whereClause = [whereClause stringByAppendingString:[NSString stringWithFormat:@"objectId = '%@' OR ", objectId]];
+        }
+        DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
+        [queryBuilder setWhereClause:[whereClause substringToIndex:[whereClause length] - 4]];
+        [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
+            self.items = menuItems;
+            [self.tableView reloadData];
+        } error:^(Fault *fault) {
+            
+        }];
+    }
+    else {
+        self.items = [NSMutableArray new];
+        [self.tableView reloadData];
+    }
+}
+
 
 @end
