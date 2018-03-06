@@ -15,6 +15,11 @@
     
     [self.view bringSubviewToFront:self.enterTheAppButton];
     [self.view bringSubviewToFront:self.loginWithFacebookButton];
+    
+    self.loginWithFacebookButton.layer.cornerRadius = 20;
+    self.loginWithFacebookButton.layer.masksToBounds = YES;
+    self.enterTheAppButton.layer.cornerRadius = 20;
+    self.enterTheAppButton.layer.masksToBounds = YES;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

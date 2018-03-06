@@ -1,7 +1,7 @@
 
 #import "HomeViewController.h"
 #import "ItemsViewController.h"
-#import "AboutViewController.h"
+#import "AboutUsViewController.h"
 #import "ColorHelper.h"
 #import "Backendless.h"
 #import "MenuItem.h"
@@ -177,7 +177,7 @@
         [[backendless.data of:[Business class]] find:^(NSArray *business) {
             [[backendless.data of:[OpenHoursInfo class]] find:^(NSArray *openHours) {
                 UINavigationController *navController = [segue destinationViewController];
-                AboutViewController *aboutUsVC = (AboutViewController *)[navController topViewController];
+                AboutUsViewController *aboutUsVC = (AboutUsViewController *)[navController topViewController];
                 aboutUsVC.business = business.firstObject;
                 aboutUsVC.openHours = [self convertOpenHoursArrayToDictionary:openHours];
                 [aboutUsVC.tableView reloadData];

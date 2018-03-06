@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
-@class GeoPoint;
-@class Picture;
+#import "GeoPoint.h"
+#import "Picture.h"
 
 @interface Business: NSObject
               

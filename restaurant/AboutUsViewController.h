@@ -3,7 +3,7 @@
 #import "Business.h"
 #import "OpenHoursInfo.h"
 
-@interface AboutViewController : UITableViewController
+@interface AboutUsViewController : UITableViewController
 
 @property (strong, nonatomic) Business *business;
 @property (strong, nonatomic) NSDictionary *openHours;

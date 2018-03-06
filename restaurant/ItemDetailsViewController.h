@@ -5,6 +5,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favoritesButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cartButton;
 @property (strong, nonatomic) id item;
 
 - (IBAction)pressedAddToCart:(id)sender;

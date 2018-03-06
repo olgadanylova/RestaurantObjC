@@ -32,7 +32,7 @@
         menuItem = self.item;
         menuItemOptions = menuItem.standardOptions;
         menuItemExtras = menuItem.extraOptions;
-        menuItemPrices = menuItem.prices;        
+        menuItemPrices = menuItem.prices;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", menuItem.objectId];
         if ([[userDefaultsHelper getFavoriteItems] filteredArrayUsingPredicate:predicate].firstObject) {
             self.favoritesButton.title = REMOVE_FROM_FAV;
@@ -47,9 +47,15 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:4];
-    [self.table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [self tableView:self.table didSelectRowAtIndexPath:indexPath];
+    if ([self.item isKindOfClass:[MenuItem class]]) {
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:4];
+        [self.table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+        [self tableView:self.table didSelectRowAtIndexPath:indexPath];
+    }
+    else {
+        self.cartButton.enabled = NO;
+        self.cartButton.tintColor = [UIColor clearColor];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -127,7 +133,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"waitingImage.png"]];
         if ([self.item isKindOfClass:[MenuItem class]]) {
-            Picture *picture = menuItem.pictures.firstObject;            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            Picture *picture = menuItem.pictures.firstObject;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     cell.backgroundView = [[UIImageView alloc] initWithImage:image];
