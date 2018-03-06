@@ -12,6 +12,9 @@
 		0F7A633A1E769BB6007B6B07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7A63381E769BB6007B6B07 /* Main.storyboard */; };
 		0F7A633C1E769BB6007B6B07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F7A633B1E769BB6007B6B07 /* Assets.xcassets */; };
 		0F7A633F1E769BB6007B6B07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7A633D1E769BB6007B6B07 /* LaunchScreen.storyboard */; };
+		5A2CD208204E88B700BDA138 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD207204E88B700BDA138 /* UserDefaultsHelper.m */; };
+		5A2CD236204ECDCE00BDA138 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD235204ECDCE00BDA138 /* AboutViewController.m */; };
+		5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */; };
 		5A5EEF992046A8F7004EB70B /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5EEF982046A8F7004EB70B /* ItemCell.m */; };
 		5AA7599B20494CD700958134 /* ItemInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA7599A20494CD700958134 /* ItemInfoCell.m */; };
 		5AA759A120496F5400958134 /* SizeAndPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA759A020496F5400958134 /* SizeAndPriceCell.m */; };
@@ -33,7 +36,7 @@
 		5ABE8A9B204592DC00211CF5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A94204592DB00211CF5 /* HomeViewController.m */; };
 		5ABE8A9C204592DC00211CF5 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A95204592DB00211CF5 /* SplitViewController.m */; };
 		5ABE8A9D204592DC00211CF5 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A98204592DC00211CF5 /* ItemsViewController.m */; };
-		5ABE8AA62045B83C00211CF5 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8AA42045B83C00211CF5 /* Helper.m */; };
+		5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8AA42045B83C00211CF5 /* ColorHelper.m */; };
 		F3E7B0260926D8A881266C3B /* Pods_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFB7EAAF8C2D8875B10EB7E /* Pods_restaurant.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,12 @@
 		0F7A633B1E769BB6007B6B07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F7A633E1E769BB6007B6B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F7A63401E769BB6007B6B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A2CD206204E88B700BDA138 /* UserDefaultsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsHelper.h; sourceTree = "<group>"; };
+		5A2CD207204E88B700BDA138 /* UserDefaultsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsHelper.m; sourceTree = "<group>"; };
+		5A2CD234204ECDCE00BDA138 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		5A2CD235204ECDCE00BDA138 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		5A2CD237204ED34F00BDA138 /* RestaurantInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestaurantInfoCell.h; sourceTree = "<group>"; };
+		5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfoCell.m; sourceTree = "<group>"; };
 		5A5EEF972046A8F7004EB70B /* ItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
 		5A5EEF982046A8F7004EB70B /* ItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		5AA7599920494CD700958134 /* ItemInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemInfoCell.h; sourceTree = "<group>"; };
@@ -335,8 +344,8 @@
 		5ABE8A97204592DC00211CF5 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = "View Controllers/HomeViewController.h"; sourceTree = "<group>"; };
 		5ABE8A98204592DC00211CF5 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemsViewController.m; path = "View Controllers/ItemsViewController.m"; sourceTree = "<group>"; };
 		5ABE8A99204592DC00211CF5 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitViewController.h; path = "View Controllers/SplitViewController.h"; sourceTree = "<group>"; };
-		5ABE8AA42045B83C00211CF5 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
-		5ABE8AA52045B83C00211CF5 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		5ABE8AA42045B83C00211CF5 /* ColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHelper.m; sourceTree = "<group>"; };
+		5ABE8AA52045B83C00211CF5 /* ColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
 		83F6F5EA923AD8BAF95B29DB /* Pods-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		CD34DB641772E0E51991788C /* Pods-restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.release.xcconfig"; sourceTree = "<group>"; };
 		FBFB7EAAF8C2D8875B10EB7E /* Pods_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,13 +394,12 @@
 		0F7A632E1E769BB6007B6B07 /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				5A2CD205204E888700BDA138 /* Utils */,
 				5ABE8A702045926F00211CF5 /* Data */,
 				5ABE8AAA2045BC9E00211CF5 /* Cells */,
 				5ABE8A51204558A000211CF5 /* View Controllers */,
 				0F7A63321E769BB6007B6B07 /* AppDelegate.h */,
 				0F7A63331E769BB6007B6B07 /* AppDelegate.m */,
-				5ABE8AA52045B83C00211CF5 /* Helper.h */,
-				5ABE8AA42045B83C00211CF5 /* Helper.m */,
 				0F7A63381E769BB6007B6B07 /* Main.storyboard */,
 				0F7A633D1E769BB6007B6B07 /* LaunchScreen.storyboard */,
 				0F7A63401E769BB6007B6B07 /* Info.plist */,
@@ -407,6 +415,17 @@
 				0F7A63301E769BB6007B6B07 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5A2CD205204E888700BDA138 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5ABE8AA52045B83C00211CF5 /* ColorHelper.h */,
+				5ABE8AA42045B83C00211CF5 /* ColorHelper.m */,
+				5A2CD206204E88B700BDA138 /* UserDefaultsHelper.h */,
+				5A2CD207204E88B700BDA138 /* UserDefaultsHelper.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		5ABE89542045586000211CF5 /* lib */ = {
@@ -694,6 +713,8 @@
 				5ABE8A98204592DC00211CF5 /* ItemsViewController.m */,
 				5AB2E68E2048622A0040E45F /* ItemDetailsViewController.h */,
 				5AB2E68F2048622A0040E45F /* ItemDetailsViewController.m */,
+				5A2CD234204ECDCE00BDA138 /* AboutViewController.h */,
+				5A2CD235204ECDCE00BDA138 /* AboutViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -738,6 +759,8 @@
 				5AB2E68C204834B80040E45F /* OptionsAndExtrasCell.m */,
 				5AA7599F20496F5400958134 /* SizeAndPriceCell.h */,
 				5AA759A020496F5400958134 /* SizeAndPriceCell.m */,
+				5A2CD237204ED34F00BDA138 /* RestaurantInfoCell.h */,
+				5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -889,12 +912,15 @@
 				5AA759A120496F5400958134 /* SizeAndPriceCell.m in Sources */,
 				5ABE8A9D204592DC00211CF5 /* ItemsViewController.m in Sources */,
 				5ABE8A8D204592D000211CF5 /* MenuItem.m in Sources */,
+				5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */,
 				5ABE8A88204592D000211CF5 /* Article.m in Sources */,
 				5ABE8A90204592D000211CF5 /* ExtraOption.m in Sources */,
-				5ABE8AA62045B83C00211CF5 /* Helper.m in Sources */,
+				5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */,
+				5A2CD236204ECDCE00BDA138 /* AboutViewController.m in Sources */,
 				5ABE8A8C204592D000211CF5 /* Business.m in Sources */,
 				5AA7599B20494CD700958134 /* ItemInfoCell.m in Sources */,
 				5ABE8A9C204592DC00211CF5 /* SplitViewController.m in Sources */,
+				5A2CD208204E88B700BDA138 /* UserDefaultsHelper.m in Sources */,
 				5ABE8A8A204592D000211CF5 /* Picture.m in Sources */,
 				0F7A63311E769BB6007B6B07 /* main.m in Sources */,
 				5ABE8A91204592D000211CF5 /* Map.m in Sources */,

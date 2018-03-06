@@ -11,9 +11,7 @@
 @property (nonatomic, strong) NSDate *updated;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) Picture *picture;
-                        
-@property (nonatomic, strong) Picture *thumb;
-                        
+@property (nonatomic, strong) Picture *thumb;                       
               
 @end
             

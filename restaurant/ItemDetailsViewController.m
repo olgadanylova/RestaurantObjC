@@ -3,7 +3,8 @@
 #import "ItemInfoCell.h"
 #import "OptionsAndExtrasCell.h"
 #import "SizeAndPriceCell.h"
-#import "Helper.h"
+#import "ColorHelper.h"
+#import "UserDefaultsHelper.h"
 #import "Article.h"
 #import "MenuItem.h"
 
@@ -31,9 +32,9 @@
         menuItem = self.item;
         menuItemOptions = menuItem.standardOptions;
         menuItemExtras = menuItem.extraOptions;
-        menuItemPrices = menuItem.prices;
-        
-        if ([[helper getFavoriteObjectIds] containsObject:menuItem.objectId]) {
+        menuItemPrices = menuItem.prices;        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", menuItem.objectId];
+        if ([[userDefaultsHelper getFavoriteItems] filteredArrayUsingPredicate:predicate].firstObject) {
             self.favoritesButton.title = REMOVE_FROM_FAV;
         }
         [self.navigationController setToolbarHidden:NO animated:YES];
@@ -46,9 +47,9 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSIndexPath* idx = [NSIndexPath indexPathForRow:0 inSection:4];
-    [_table selectRowAtIndexPath:idx animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [self tableView:_table didSelectRowAtIndexPath:idx];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:4];
+    [self.table selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    [self tableView:self.table didSelectRowAtIndexPath:indexPath];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -107,7 +108,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    view.tintColor = [helper getColorFromHex:@"#FF9300" withAlpha:1];
+    view.tintColor = [colorHelper getColorFromHex:@"#FF9300" withAlpha:1];
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     header.textLabel.textColor = [UIColor whiteColor];
 }
@@ -157,7 +158,9 @@
             for (Tag *tag in menuItem.tags) {
                 tagsString = [tagsString stringByAppendingString:[NSString stringWithFormat:@"%@, ", tag.name]];
             }
-            tagsString = [tagsString substringToIndex:[tagsString length] - 2];
+            if ([tagsString length] > 0) {
+                tagsString = [tagsString substringToIndex:[tagsString length] - 2];
+            }
             cell.tagsLabel.text = tagsString;
             cell.bodyLabel.text = menuItem.body;
         }
@@ -220,11 +223,11 @@
 - (IBAction)pressedAddToFavorites:(id)sender {
     if ([self.favoritesButton.title isEqualToString:ADD_TO_FAV]) {
         self.favoritesButton.title = REMOVE_FROM_FAV;
-        [helper addObjectIdToFavorites:menuItem.objectId];
+        [userDefaultsHelper addItemToFavorites:menuItem];
     }
     else {
         self.favoritesButton.title = ADD_TO_FAV;
-        [helper removeObjectIdFromFavorites:menuItem.objectId];
+        [userDefaultsHelper removeItemFromFavorites:menuItem];
     }
 }
 

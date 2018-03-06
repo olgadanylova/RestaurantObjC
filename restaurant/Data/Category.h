@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-@class Picture;
+#import "Picture.h"
 
 @interface Category: NSObject
               
@@ -12,8 +12,7 @@
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSDate *created;
 @property (nonatomic, strong) NSString *ownerId;
-@property (nonatomic, strong) Picture *thumb;
-                        
+@property (nonatomic, strong) Picture *thumb;                        
               
 @end
             

@@ -21,11 +21,8 @@
 @property (nonatomic, strong) NSMutableArray *tags;
 @property (nonatomic, strong) NSMutableArray *prices;
 @property (nonatomic, strong) NSMutableArray *pictures;
-@property (nonatomic, strong) Picture *thumb;                        
+@property (nonatomic, strong) Picture *thumb;
 @property (nonatomic, strong) NSMutableArray *standardOptions;
 
-- (void) encodeWithCoder : (NSCoder *)encode ;
-- (id) initWithCoder : (NSCoder *)decode;
-              
 @end
             

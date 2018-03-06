@@ -1,16 +1,18 @@
 
 #import "HomeViewController.h"
 #import "ItemsViewController.h"
-#import "Helper.h"
+#import "AboutViewController.h"
+#import "ColorHelper.h"
 #import "Backendless.h"
 #import "MenuItem.h"
 #import "Category.h"
 #import "Article.h"
+#import "Business.h"
+#import "OpenHoursInfo.h"
 
 #define FAVORITES @"★ Favorites"
 #define SHOPPING_CART @"🛒 Shopping Cart"
-#define CONTACT_US @"✆ Contact us"
-#define MAP @"📍 Map"
+#define ABOUT @"ℹ About us"
 #define LOGOUT @"← Logout"
 #define ARTICLES @"📰 Articles"
 
@@ -41,7 +43,7 @@
     
     favoritesAndCart = @[FAVORITES, SHOPPING_CART];
     news = @[ARTICLES];
-    other = @[CONTACT_US, MAP, LOGOUT];
+    other = @[ABOUT, LOGOUT];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -85,7 +87,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    view.tintColor = [helper getColorFromHex:@"#FF9300" withAlpha:1];
+    view.tintColor = [colorHelper getColorFromHex:@"#FF9300" withAlpha:1];
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     header.textLabel.textColor = [UIColor whiteColor];
 }
@@ -117,7 +119,7 @@
             [self performSegueWithIdentifier:@"ShowItems" sender:cell];
         }
         else if (indexPath.row == 1) {
-            // shopping cart
+            [self performSegueWithIdentifier:@"ShowCart" sender:cell];
         }
     }
     else if (indexPath.section == 1 || indexPath.section == 2) {
@@ -126,6 +128,10 @@
     else if (indexPath.section == 3 && [cell.textLabel.text isEqualToString:LOGOUT]) {
         [self performSegueWithIdentifier:@"unwindToLoginVC" sender:cell];
     }
+    else if (indexPath.section == 3 && [cell.textLabel.text isEqualToString:ABOUT]) {
+        [self performSegueWithIdentifier:@"ShowAbout" sender:cell];
+    }
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -134,8 +140,10 @@
     
     if (indexPath.section == 0) {
         UINavigationController *navController = [segue destinationViewController];
-        ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
-        itemsVC.navigationItem.title = @"Favorites";
+        if ([segue.identifier isEqualToString:@"ShowItems"]) {
+            ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
+            itemsVC.navigationItem.title = @"Favorites";
+        }
     }
     
     else if (indexPath.section == 1) {
@@ -164,6 +172,53 @@
             
         }];
     }
+    
+    else if (indexPath.section == 3 && [segue.identifier isEqualToString:@"ShowAbout"]) {
+        [[backendless.data of:[Business class]] find:^(NSArray *business) {
+            [[backendless.data of:[OpenHoursInfo class]] find:^(NSArray *openHours) {
+                UINavigationController *navController = [segue destinationViewController];
+                AboutViewController *aboutUsVC = (AboutViewController *)[navController topViewController];
+                aboutUsVC.business = business.firstObject;
+                aboutUsVC.openHours = [self convertOpenHoursArrayToDictionary:openHours];
+                [aboutUsVC.tableView reloadData];
+            } error:^(Fault *f) {
+            }];
+        } error:^(Fault *f) {
+        }];   
+    }
+}
+
+-(NSDictionary *)convertOpenHoursArrayToDictionary:(NSArray *)openHoursArray {
+    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];
+    
+    for (OpenHoursInfo *openHoursInfo in openHoursArray) {
+        NSNumber *day = openHoursInfo.day;
+        NSDate *openAt = openHoursInfo.openAt;
+        NSDate *closeAt = openHoursInfo.closeAt;
+        
+        if (![openHoursDictionary objectForKey:day]) {
+            NSString *openClose = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
+            [openHoursDictionary setObject:openClose forKey:[self stringFromWeekday:[day integerValue]]];
+        }
+        else {
+            NSString *openClose = [openHoursDictionary objectForKey:[self stringFromWeekday:[day integerValue]]];
+            openClose = [openClose stringByAppendingString:[NSString stringWithFormat:@" / %@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]]];
+            [openHoursDictionary setObject:openClose forKey:day];
+        }
+    }
+    return openHoursDictionary;
+}
+
+-(NSString *)stringFromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    return [dateFormatter stringFromDate:date];
+}
+
+- (NSString *)stringFromWeekday:(NSInteger)weekday {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    return dateFormatter.shortWeekdaySymbols[weekday];
 }
 
 @end

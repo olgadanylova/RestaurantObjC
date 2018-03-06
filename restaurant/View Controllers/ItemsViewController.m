@@ -5,7 +5,8 @@
 #import "MenuItem.h"
 #import "Article.h"
 #import "Backendless.h"
-#import "Helper.h"
+#import "ColorHelper.h"
+#import "UserDefaultsHelper.h"
 
 @implementation ItemsViewController
 
@@ -63,13 +64,16 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];       
-        [helper removeObjectIdFromFavorites:menuItem.objectId];
+        MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];
+        [userDefaultsHelper removeItemFromFavorites:menuItem];
         [self getFavoriteItems];
     }
 }
@@ -83,26 +87,9 @@
 }
 
 -(void)getFavoriteItems {
-    NSArray *favoriteObjectIds = [helper getFavoriteObjectIds];
-    if ([favoriteObjectIds count] > 0) {
-        NSString *whereClause = @"";
-        for (NSString *objectId in favoriteObjectIds) {
-            whereClause = [whereClause stringByAppendingString:[NSString stringWithFormat:@"objectId = '%@' OR ", objectId]];
-        }
-        DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
-        [queryBuilder setWhereClause:[whereClause substringToIndex:[whereClause length] - 4]];
-        [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
-            self.items = menuItems;
-            [self.tableView reloadData];
-        } error:^(Fault *fault) {
-            
-        }];
-    }
-    else {
-        self.items = [NSMutableArray new];
-        [self.tableView reloadData];
-    }
+    NSArray *favoriteItems = [userDefaultsHelper getFavoriteItems];
+    self.items = favoriteItems;
+    [self.tableView reloadData];
 }
-
 
 @end
