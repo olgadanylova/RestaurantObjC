@@ -435,7 +435,7 @@
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="keR-ng-xtQ"/>
                         <barButtonItem title="Proceed to payment: 0$" id="isY-Oq-P1p">
-                            <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dlE-C8-fPR"/>
                     </toolbarItems>
@@ -621,7 +621,7 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="7mV-7K-BlL"/>
                         <barButtonItem title="Add to cart" id="4vI-bw-3Ql">
-                            <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="pressedAddToCart:" destination="kSD-3D-1ik" id="elw-Bq-7JC"/>
                             </connections>
@@ -630,7 +630,7 @@
                     <navigationItem key="navigationItem" id="UU8-iu-cA3">
                         <barButtonItem key="rightBarButtonItem" title="🛒" id="Qew-AM-C7n">
                             <connections>
-                                <segue destination="rsG-91-rxU" kind="show" identifier="ShowCart" id="rjT-zP-OdP"/>
+                                <action selector="pressedGoToCart:" destination="kSD-3D-1ik" id="g43-N2-rjo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -641,9 +641,12 @@
                         <outlet property="cartButton" destination="Qew-AM-C7n" id="MeW-ZQ-SAm"/>
                         <outlet property="table" destination="iP1-qJ-sfl" id="t0b-rm-BGV"/>
                         <outlet property="tableView" destination="iP1-qJ-sfl" id="pQu-5o-ub6"/>
+                        <segue destination="rsG-91-rxU" kind="show" identifier="ShowCart" id="G4J-6V-HZN"/>
+                        <segue destination="ghu-aN-JbL" kind="unwind" identifier="unwindToItemsVC" unwindAction="unwindToItemsVC:" id="KUB-zR-o6f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJW-iR-OSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ghu-aN-JbL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3338" y="1144"/>
         </scene>
@@ -902,6 +905,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Qb-oy-1uw"/>
-        <segue reference="rjT-zP-OdP"/>
+        <segue reference="G4J-6V-HZN"/>
     </inferredMetricsTieBreakers>
 </document>

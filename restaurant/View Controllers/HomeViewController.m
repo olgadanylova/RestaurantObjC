@@ -9,6 +9,7 @@
 #import "Article.h"
 #import "Business.h"
 #import "OpenHoursInfo.h"
+#import "AlertViewController.h"
 
 #define FAVORITES @"★ Favorites"
 #define SHOPPING_CART @"🛒 Shopping Cart"
@@ -38,7 +39,7 @@
         }
         [self.tableView reloadData];
     } error:^(Fault *fault) {
-        
+        [AlertViewController showErrorAlert:fault target:self handler:nil];
     }];
     
     favoritesAndCart = @[FAVORITES, SHOPPING_CART];
@@ -157,7 +158,7 @@
             itemsVC.items = menuItems;
             [itemsVC.tableView reloadData];
         } error:^(Fault *fault) {
-            
+            [AlertViewController showErrorAlert:fault target:self handler:nil];
         }];
     }
     
@@ -169,7 +170,7 @@
             itemsVC.items = articles;
             [itemsVC.tableView reloadData];
         } error:^(Fault *fault) {
-            
+            [AlertViewController showErrorAlert:fault target:self handler:nil];
         }];
     }
     

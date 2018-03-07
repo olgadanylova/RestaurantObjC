@@ -7,6 +7,7 @@
 #import "UserDefaultsHelper.h"
 #import "Article.h"
 #import "MenuItem.h"
+#import "AlertViewController.h"
 
 #define ADD_TO_FAV @"Add to favorites"
 #define REMOVE_FROM_FAV @"Remove from favorites"
@@ -239,7 +240,19 @@
 }
 
 - (IBAction)pressedAddToCart:(id)sender {
-    [userDefaultsHelper addItemToShoppingCart:menuItem];
+    @try {       
+        [userDefaultsHelper addItemToShoppingCart:menuItem];
+        [AlertViewController showAddedToCartAlert:@"Shopping cart" message:@"Menu item added to cart" target:self handler1:^(UIAlertAction *continueShopping) {
+            [self performSegueWithIdentifier:@"unwindToItemsVC" sender:nil];
+        } handler2:^(UIAlertAction *goToCart) {
+            [self performSegueWithIdentifier:@"ShowCart" sender:nil];
+        }];
+    }
+    @catch (NSException *exception) {
+        Fault *fault = [Fault fault:exception.name detail:exception.reason];
+        [AlertViewController showErrorAlert:fault target:self handler:nil];
+    }
+    
 }
 
 - (IBAction)pressedAddToFavorites:(id)sender {
@@ -251,6 +264,10 @@
         self.addToFavoritesButton.title = ADD_TO_FAV;
         [userDefaultsHelper removeItemFromFavorites:menuItem];
     }
+}
+
+- (IBAction)pressedGoToCart:(id)sender {
+    [self performSegueWithIdentifier:@"ShowCart" sender:nil];
 }
 
 @end

@@ -55,15 +55,7 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(selected = 1)"];
     NSMutableArray *standardOptions = [NSMutableArray arrayWithArray:[menuItem.standardOptions filteredArrayUsingPredicate:predicate]];
-    NSMutableArray *extraOptions = [NSMutableArray arrayWithArray:[menuItem.extraOptions filteredArrayUsingPredicate:predicate]];
-    
-    for (StandardOption *s in standardOptions) {
-        NSLog(@"s: %@ - %@", s.name, s.selected);
-    }
-    for (ExtraOption *e in extraOptions) {
-        NSLog(@"e: %@ - %@", e.name, e.selected);
-    }
-    
+    NSMutableArray *extraOptions = [NSMutableArray arrayWithArray:[menuItem.extraOptions filteredArrayUsingPredicate:predicate]];    
     
     NSString *optionsString = @"";
     

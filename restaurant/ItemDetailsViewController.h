@@ -11,5 +11,6 @@
 
 - (IBAction)pressedAddToCart:(id)sender;
 - (IBAction)pressedAddToFavorites:(id)sender;
+- (IBAction)pressedGoToCart:(id)sender;
 
 @end

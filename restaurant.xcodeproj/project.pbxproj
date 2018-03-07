@@ -41,6 +41,7 @@
 		5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8AA42045B83C00211CF5 /* ColorHelper.m */; };
 		5E2407A0204F286400E82A86 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E24079F204F286400E82A86 /* MapViewController.m */; };
 		5E2407A7204F2B4B00E82A86 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2407A6204F2B4B00E82A86 /* MapPin.m */; };
+		5E3B418120504841004D2FF6 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B418020504841004D2FF6 /* AlertViewController.m */; };
 		9190F5F0B1BF930729319420 /* Pods_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143ED9CD3BC27F04B6C7AA7 /* Pods_restaurant.framework */; };
 /* End PBXBuildFile section */
 
@@ -359,6 +360,8 @@
 		5E24079F204F286400E82A86 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		5E2407A5204F2B4B00E82A86 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
 		5E2407A6204F2B4B00E82A86 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
+		5E3B417F20504841004D2FF6 /* AlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		5E3B418020504841004D2FF6 /* AlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		C1D3FD66E396ADAC8AEEF57D /* Pods-restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.release.xcconfig"; sourceTree = "<group>"; };
 		EE78D56FD4E9A1E5555B2EA6 /* Pods-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -725,6 +728,8 @@
 		5ABE8A51204558A000211CF5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E3B417F20504841004D2FF6 /* AlertViewController.h */,
+				5E3B418020504841004D2FF6 /* AlertViewController.m */,
 				5ABE8A93204592DB00211CF5 /* LoginViewController.h */,
 				5ABE8A92204592DB00211CF5 /* LoginViewController.m */,
 				5ABE8A99204592DC00211CF5 /* SplitViewController.h */,
@@ -940,6 +945,7 @@
 				5AA759A120496F5400958134 /* SizeAndPriceCell.m in Sources */,
 				5ABE8A9D204592DC00211CF5 /* ItemsViewController.m in Sources */,
 				5ABE8A8D204592D000211CF5 /* MenuItem.m in Sources */,
+				5E3B418120504841004D2FF6 /* AlertViewController.m in Sources */,
 				5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */,
 				5ABE8A88204592D000211CF5 /* Article.m in Sources */,
 				5ABE8A90204592D000211CF5 /* ExtraOption.m in Sources */,
