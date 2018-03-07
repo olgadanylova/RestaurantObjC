@@ -1,6 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuItem.h"
+#import "ShoppingCartItem.h"
 
 #define userDefaultsHelper [UserDefaultsHelper sharedInstance]
 

@@ -42,6 +42,8 @@
 		5E2407A0204F286400E82A86 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E24079F204F286400E82A86 /* MapViewController.m */; };
 		5E2407A7204F2B4B00E82A86 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2407A6204F2B4B00E82A86 /* MapPin.m */; };
 		5E3B418120504841004D2FF6 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B418020504841004D2FF6 /* AlertViewController.m */; };
+		5E743B6E2050A13C0091033A /* ShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E743B6D2050A13C0091033A /* ShoppingCart.m */; };
+		5E743B712050A1E30091033A /* ShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E743B702050A1E30091033A /* ShoppingCartItem.m */; };
 		9190F5F0B1BF930729319420 /* Pods_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0143ED9CD3BC27F04B6C7AA7 /* Pods_restaurant.framework */; };
 /* End PBXBuildFile section */
 
@@ -362,6 +364,10 @@
 		5E2407A6204F2B4B00E82A86 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		5E3B417F20504841004D2FF6 /* AlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		5E3B418020504841004D2FF6 /* AlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		5E743B6C2050A13C0091033A /* ShoppingCart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCart.h; sourceTree = "<group>"; };
+		5E743B6D2050A13C0091033A /* ShoppingCart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCart.m; sourceTree = "<group>"; };
+		5E743B6F2050A1E30091033A /* ShoppingCartItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartItem.h; sourceTree = "<group>"; };
+		5E743B702050A1E30091033A /* ShoppingCartItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartItem.m; sourceTree = "<group>"; };
 		C1D3FD66E396ADAC8AEEF57D /* Pods-restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.release.xcconfig"; sourceTree = "<group>"; };
 		EE78D56FD4E9A1E5555B2EA6 /* Pods-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +407,7 @@
 		0F7A632E1E769BB6007B6B07 /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				5E743B722050A1F10091033A /* Shopping Cart */,
 				5E2407A4204F2B3C00E82A86 /* Map */,
 				5A2CD205204E888700BDA138 /* Utils */,
 				5ABE8A702045926F00211CF5 /* Data */,
@@ -807,6 +814,17 @@
 			name = Map;
 			sourceTree = "<group>";
 		};
+		5E743B722050A1F10091033A /* Shopping Cart */ = {
+			isa = PBXGroup;
+			children = (
+				5E743B6C2050A13C0091033A /* ShoppingCart.h */,
+				5E743B6D2050A13C0091033A /* ShoppingCart.m */,
+				5E743B6F2050A1E30091033A /* ShoppingCartItem.h */,
+				5E743B702050A1E30091033A /* ShoppingCartItem.m */,
+			);
+			name = "Shopping Cart";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -940,6 +958,7 @@
 				5ABE8A8B204592D000211CF5 /* Tag.m in Sources */,
 				0F7A63341E769BB6007B6B07 /* AppDelegate.m in Sources */,
 				5AB2E6902048622A0040E45F /* ItemDetailsViewController.m in Sources */,
+				5E743B712050A1E30091033A /* ShoppingCartItem.m in Sources */,
 				5ABE8A8F204592D000211CF5 /* Category.m in Sources */,
 				5ABE8A8E204592D000211CF5 /* StandardOption.m in Sources */,
 				5AA759A120496F5400958134 /* SizeAndPriceCell.m in Sources */,
@@ -964,6 +983,7 @@
 				5E2407A0204F286400E82A86 /* MapViewController.m in Sources */,
 				5A5EEF992046A8F7004EB70B /* ItemCell.m in Sources */,
 				5ABE8A9B204592DC00211CF5 /* HomeViewController.m in Sources */,
+				5E743B6E2050A13C0091033A /* ShoppingCart.m in Sources */,
 				5E2407A7204F2B4B00E82A86 /* MapPin.m in Sources */,
 				5ABE8A87204592D000211CF5 /* Price.m in Sources */,
 				5AB2E68D204834B80040E45F /* OptionsAndExtrasCell.m in Sources */,
