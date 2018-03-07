@@ -11,7 +11,4 @@
     return UIEdgeInsetsZero;
 }
 
-- (IBAction)pressedViewMap:(id)sender {
-}
-
 @end

@@ -20,7 +20,8 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
     
     if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
-        [self getFavoriteItems];
+        self.items = [userDefaultsHelper getFavoriteItems];
+        [self.tableView reloadData];
     }
 }
 
@@ -74,7 +75,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];
         [userDefaultsHelper removeItemFromFavorites:menuItem];
-        [self getFavoriteItems];
+        self.items = [userDefaultsHelper getFavoriteItems];
+        [self.tableView reloadData];
     }
 }
 
@@ -84,12 +86,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         itemDetailsVC.item = [self.items objectAtIndex:indexPath.row];
     }
-}
-
--(void)getFavoriteItems {
-    NSArray *favoriteItems = [userDefaultsHelper getFavoriteItems];
-    self.items = favoriteItems;
-    [self.tableView reloadData];
 }
 
 @end

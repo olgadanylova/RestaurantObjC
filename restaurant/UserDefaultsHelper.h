@@ -12,8 +12,8 @@
 -(void)removeItemFromFavorites:(MenuItem *)item;
 -(NSMutableArray *)getFavoriteItems;
 
-//-(void)addItemToShoppingCart:(MenuItem *)item;
-//-(void)removeItemFromShoppingCart:(NSString *)item;
-//-(NSMutableArray *)getShoppingCartItems;
+-(void)addItemToShoppingCart:(MenuItem *)item;
+-(void)removeItemFromShoppingCart:(MenuItem *)item;
+-(NSMutableArray *)getShoppingCartItems;
 
 @end

@@ -7,6 +7,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
-- (IBAction)pressedViewMap:(id)sender;
-
 @end
