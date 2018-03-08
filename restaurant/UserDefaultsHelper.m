@@ -1,5 +1,6 @@
 
 #import "UserDefaultsHelper.h"
+#import "ShoppingCartItem.h"
 
 #define FAVORITES_KEY @"restaurantFavorites"
 #define SHOPPING_CART_KEY @"restaurantShoppingCart"
@@ -15,29 +16,29 @@
     return sharedHelper;
 }
 
--(void)addItemToFavorites:(MenuItem *)item {
+-(void)addItemToFavorites:(MenuItem *)menuItem {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY];
     NSMutableArray *favoriteItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
     if (!favoriteItems) {
         favoriteItems = [NSMutableArray new];
     }
-    [favoriteItems addObject:item];
+    [favoriteItems addObject:menuItem];
     data = [NSKeyedArchiver archivedDataWithRootObject:favoriteItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:FAVORITES_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)removeItemFromFavorites:(MenuItem *)item {
+-(void)removeItemFromFavorites:(MenuItem *)menuItem {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY];
     NSMutableArray *favoriteItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", item.objectId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", menuItem.objectId];
     [favoriteItems removeObject:[favoriteItems filteredArrayUsingPredicate:predicate].firstObject];
     data = [NSKeyedArchiver archivedDataWithRootObject:favoriteItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:FAVORITES_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(NSMutableArray *)getFavoriteItems {
+-(NSMutableArray *)getFavoriteMenuItems {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY];
     NSMutableArray *favoriteItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
     if (favoriteItems) {
@@ -46,47 +47,49 @@
     return [NSMutableArray new];
 }
 
--(void)addItemToShoppingCart:(MenuItem *)item {
+-(void)addItemToShoppingCart:(MenuItem *)menuItem {
     ShoppingCartItem *shoppingCartItem = [ShoppingCartItem new];
-    shoppingCartItem.menuItem = item;
+    shoppingCartItem.menuItem = menuItem;
     shoppingCartItem.quantity = @1;
     
-    Price *price = item.prices.firstObject;
-    NSNumber *p = price.value;
-    NSArray *extraOpts = item.extraOptions;
-    NSNumber *pp = @0;
-    for (ExtraOption *extra in extraOpts) {
-        pp = [NSNumber numberWithDouble:([pp doubleValue] + [extra.value doubleValue])];
-    }    
-    shoppingCartItem.price = [NSNumber numberWithDouble:([p doubleValue] + [pp doubleValue])];
+    Price *menuItemPrice = menuItem.prices.firstObject;
+    NSNumber *price = menuItemPrice.value;
+    NSArray *extraOptions = menuItem.extraOptions;
+    NSNumber *extraPrice = @0;
     
+    for (ExtraOption *extra in extraOptions) {
+        if ([extra.selected  isEqual: @1]) {
+            extraPrice = [NSNumber numberWithDouble:([extraPrice doubleValue] + [extra.value doubleValue])];
+        }
+    }
+    shoppingCartItem.price = [NSNumber numberWithDouble:([price doubleValue] + [extraPrice doubleValue])];
     
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
-    NSMutableArray *cartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    if (!cartItems) {
-        cartItems = [NSMutableArray new];
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    if (!shoppingCartItems) {
+        shoppingCartItems = [NSMutableArray new];
     }
-    [cartItems addObject:shoppingCartItem];
-    data = [NSKeyedArchiver archivedDataWithRootObject:cartItems];
+    [shoppingCartItems addObject:shoppingCartItem];
+    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)removeItemFromShoppingCart:(MenuItem *)item {
+-(void)removeItemFromShoppingCart:(MenuItem *)menuItem {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
-    NSMutableArray *cartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"menuItem.objectId == %@", item.objectId];
-    [cartItems removeObject:[cartItems filteredArrayUsingPredicate:predicate].firstObject];
-    data = [NSKeyedArchiver archivedDataWithRootObject:cartItems];
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"menuItem.objectId == %@", menuItem.objectId];
+    [shoppingCartItems removeObject:[shoppingCartItems filteredArrayUsingPredicate:predicate].firstObject];
+    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSMutableArray *)getShoppingCartItems {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
-    NSMutableArray *cartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    if (cartItems) {
-        return cartItems;
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    if (shoppingCartItems) {
+        return shoppingCartItems;
     }
     return [NSMutableArray new];
 }

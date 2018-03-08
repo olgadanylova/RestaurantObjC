@@ -434,13 +434,16 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="keR-ng-xtQ"/>
-                        <barButtonItem title="Proceed to payment: 0$" id="isY-Oq-P1p">
+                        <barButtonItem title="Proceed to payment: $0" id="isY-Oq-P1p">
                             <color key="tintColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dlE-C8-fPR"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Shopping Cart" id="p7y-dI-YBS"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="proceedToPaymentButton" destination="isY-Oq-P1p" id="rgu-g4-Z59"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8U-nE-H0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -1,7 +1,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuItem.h"
-#import "ShoppingCartItem.h"
 
 #define userDefaultsHelper [UserDefaultsHelper sharedInstance]
 
@@ -9,12 +8,12 @@
 
 +(instancetype)sharedInstance;
 
--(void)addItemToFavorites:(MenuItem *)item;
--(void)removeItemFromFavorites:(MenuItem *)item;
--(NSMutableArray *)getFavoriteItems;
+-(void)addItemToFavorites:(MenuItem *)menuItem;
+-(void)removeItemFromFavorites:(MenuItem *)menuItem;
+-(NSMutableArray *)getFavoriteMenuItems;
 
--(void)addItemToShoppingCart:(MenuItem *)item;
--(void)removeItemFromShoppingCart:(MenuItem *)item;
+-(void)addItemToShoppingCart:(MenuItem *)menuItem;
+-(void)removeItemFromShoppingCart:(MenuItem *)menuItem;
 -(NSMutableArray *)getShoppingCartItems;
 
 @end

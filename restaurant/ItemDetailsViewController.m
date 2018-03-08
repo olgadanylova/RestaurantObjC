@@ -13,12 +13,11 @@
 #define REMOVE_FROM_FAV @"Remove from favorites"
 
 @interface ItemDetailsViewController() {
-    NSIndexPath *currentPriceIndexPrice;
-    
     MenuItem *menuItem;
     NSArray *menuItemOptions;
     NSArray *menuItemExtras;
     NSArray *menuItemPrices;
+    NSIndexPath *cuttentPriceIndexPath;
     
     Article *article;
 }
@@ -36,7 +35,7 @@
         menuItemExtras = menuItem.extraOptions;
         menuItemPrices = menuItem.prices;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", menuItem.objectId];
-        if ([[userDefaultsHelper getFavoriteItems] filteredArrayUsingPredicate:predicate].firstObject) {
+        if ([[userDefaultsHelper getFavoriteMenuItems] filteredArrayUsingPredicate:predicate].firstObject) {
             self.addToFavoritesButton.title = REMOVE_FROM_FAV;
         }
     }
@@ -62,11 +61,11 @@
 }
 
 -(void)selectPriceAutomatically {
-    if (!currentPriceIndexPrice) {
-        currentPriceIndexPrice = [NSIndexPath indexPathForRow:0 inSection:4];
+    if (!cuttentPriceIndexPath) {
+        cuttentPriceIndexPath = [NSIndexPath indexPathForRow:0 inSection:4];
     }
-    [self.table selectRowAtIndexPath:currentPriceIndexPrice animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [self tableView:self.table didSelectRowAtIndexPath:currentPriceIndexPrice];
+    [self.table selectRowAtIndexPath:cuttentPriceIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [self tableView:self.table didSelectRowAtIndexPath:cuttentPriceIndexPath];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -225,7 +224,7 @@
     if (indexPath.section == 4) {
         SizeAndPriceCell *cell = [self.table cellForRowAtIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        currentPriceIndexPrice = indexPath;
+        cuttentPriceIndexPath = indexPath;
     }
     else {
         [self selectPriceAutomatically];
@@ -240,8 +239,11 @@
 }
 
 - (IBAction)pressedAddToCart:(id)sender {
-    @try {       
+    @try {
+        Price *selectedPrice = [menuItem.prices objectAtIndex:cuttentPriceIndexPath.row];
+        menuItem.prices = [NSMutableArray arrayWithObject:selectedPrice];
         [userDefaultsHelper addItemToShoppingCart:menuItem];
+        menuItem.prices = ((MenuItem *)self.item).prices;
         [AlertViewController showAddedToCartAlert:@"Shopping cart" message:@"Menu item added to cart" target:self handler1:^(UIAlertAction *continueShopping) {
             [self performSegueWithIdentifier:@"unwindToItemsVC" sender:nil];
         } handler2:^(UIAlertAction *goToCart) {
