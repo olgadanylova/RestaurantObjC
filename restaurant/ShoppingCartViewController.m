@@ -28,6 +28,11 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    shoppingCart.totalPrice = @0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -39,6 +44,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShoppingCartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShoppingCartCell" forIndexPath:indexPath];
     ShoppingCartItem *shoppingCartItem = [shoppingCart.shoppingCartItems objectAtIndex:indexPath.row];
+    
+    cell.quantityTextField.text = [NSString stringWithFormat:@"%@", shoppingCartItem.quantity];
+    cell.shoppingCartItem = shoppingCartItem;
     Picture *picture = shoppingCartItem.menuItem.pictures.firstObject;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
@@ -51,6 +59,8 @@
     cell.descriptionLabel.text = shoppingCartItem.menuItem.body;
     
     Price *price = shoppingCartItem.menuItem.prices.firstObject;
+    
+    cell.quantityTextField.text = [NSString stringWithFormat:@"%@", shoppingCartItem.quantity];
     cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%@ x %@ %@", price.currency, price.value, shoppingCartItem.quantity, price.name];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(selected = 1)"];
@@ -70,8 +80,9 @@
     }
     
     cell.optionsLabel.text = optionsString;
-    cell.totalLabel.text = [NSString stringWithFormat:@"Total: %@%@", price.currency, shoppingCartItem.price];
-    shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCart.totalPrice doubleValue] + [shoppingCartItem.price doubleValue])];
+    cell.totalLabel.text = [NSString stringWithFormat:@"Total: %@%@", price.currency, [NSNumber numberWithDouble:[shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]]];
+    
+    shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]) + [shoppingCart.totalPrice doubleValue]];
     self.proceedToPaymentButton.title = [NSString stringWithFormat:@"Proceed to payment: $%@", shoppingCart.totalPrice];
     
     return cell;

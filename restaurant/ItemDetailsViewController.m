@@ -247,6 +247,9 @@
         [AlertViewController showAddedToCartAlert:@"Shopping cart" message:@"Menu item added to cart" target:self handler1:^(UIAlertAction *continueShopping) {
             [self performSegueWithIdentifier:@"unwindToItemsVC" sender:nil];
         } handler2:^(UIAlertAction *goToCart) {
+            self.addToCartButton.title = @"Already added to cart";
+            [self.addToCartButton setEnabled:NO];
+            [self.table setUserInteractionEnabled:NO];
             [self performSegueWithIdentifier:@"ShowCart" sender:nil];
         }];
     }

@@ -148,30 +148,15 @@
     }
     
     else if (indexPath.section == 1) {
-        NSString *categoryName = [cell.textLabel.text substringFromIndex:2];
-        DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
-        [queryBuilder setWhereClause:[NSString stringWithFormat:@"category.title='%@'", categoryName]];
         UINavigationController *navController = [segue destinationViewController];
         ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
-        itemsVC.navigationItem.title = categoryName;
-        [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
-            itemsVC.items = menuItems;
-            [itemsVC.tableView reloadData];
-        } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
-        }];
+        itemsVC.navigationItem.title = [cell.textLabel.text substringFromIndex:2];
     }
     
     else if (indexPath.section == 2) {
-        [[backendless.data of:[Article class]] find:^(NSArray *articles) {
-            UINavigationController *navController = [segue destinationViewController];
-            ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
-            itemsVC.navigationItem.title = @"News";
-            itemsVC.items = articles;
-            [itemsVC.tableView reloadData];
-        } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
-        }];
+        UINavigationController *navController = [segue destinationViewController];
+        ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
+        itemsVC.navigationItem.title = @"News";
     }
     
     else if (indexPath.section == 3 && [segue.identifier isEqualToString:@"ShowAbout"]) {

@@ -7,6 +7,12 @@
 #import "Backendless.h"
 #import "ColorHelper.h"
 #import "UserDefaultsHelper.h"
+#import "AlertViewController.h"
+
+@interface ItemsViewController() {
+    NSArray *items;
+}
+@end
 
 @implementation ItemsViewController
 
@@ -20,8 +26,29 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
     
     if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
-        self.items = [userDefaultsHelper getFavoriteMenuItems];
+        items = [userDefaultsHelper getFavoriteMenuItems];
         [self.tableView reloadData];
+    }
+    
+    else if ([self.navigationItem.title isEqualToString:@"News"]) {
+        [[backendless.data of:[Article class]] find:^(NSArray *articles) {
+            items = articles;
+            [self.tableView reloadData];
+        } error:^(Fault *fault) {
+            [AlertViewController showErrorAlert:fault target:self handler:nil];
+        }];
+        [self.tableView reloadData];
+    }
+    
+    else {
+        DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
+        [queryBuilder setWhereClause:[NSString stringWithFormat:@"category.title='%@'", self.navigationItem.title]];
+        [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
+            items = menuItems;
+            [self.tableView reloadData];
+        } error:^(Fault *fault) {
+            [AlertViewController showErrorAlert:fault target:self handler:nil];
+        }];
     }
 }
 
@@ -30,14 +57,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.items count];
+    return [items count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    if ([self.items.firstObject isKindOfClass:[MenuItem class]]) {
-        MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];
+    if ([items.firstObject isKindOfClass:[MenuItem class]]) {
+        MenuItem *menuItem = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = menuItem.title;
         cell.descriptionLabel.text = menuItem.body;
         Picture *picture = menuItem.pictures.firstObject;
@@ -49,8 +76,8 @@
         });
     }
     
-    else if ([self.items.firstObject isKindOfClass:[Article class]]) {
-        Article *article = [self.items objectAtIndex:indexPath.row];
+    else if ([items.firstObject isKindOfClass:[Article class]]) {
+        Article *article = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = article.title;
         cell.descriptionLabel.text = article.body;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -73,9 +100,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MenuItem *menuItem = [self.items objectAtIndex:indexPath.row];
+        MenuItem *menuItem = [items objectAtIndex:indexPath.row];
         [userDefaultsHelper removeItemFromFavorites:menuItem];
-        self.items = [userDefaultsHelper getFavoriteMenuItems];
+        items = [userDefaultsHelper getFavoriteMenuItems];
         [self.tableView reloadData];
     }
 }
@@ -84,7 +111,7 @@
     if ([segue.identifier isEqualToString:@"ShowItemDetails"]) {
         ItemDetailsViewController *itemDetailsVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        itemDetailsVC.item = [self.items objectAtIndex:indexPath.row];
+        itemDetailsVC.item = [items objectAtIndex:indexPath.row];
     }
 }
 
