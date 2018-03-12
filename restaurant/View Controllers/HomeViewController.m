@@ -150,11 +150,11 @@
         itemsVC.navigationItem.title = @"News";
     }
     else if (indexPath.section == 3 && [segue.identifier isEqualToString:@"ShowAbout"]) {
-        [[backendless.data of:[Business class]] find:^(NSArray *business) {
+        [[backendless.data of:[Business class]] findFirst:^(Business *business) {
             [[backendless.data of:[OpenHoursInfo class]] find:^(NSArray *openHours) {
                 UINavigationController *navController = [segue destinationViewController];
                 AboutUsViewController *aboutUsVC = (AboutUsViewController *)[navController topViewController];
-                aboutUsVC.business = business.firstObject;
+                aboutUsVC.business = business;
                 aboutUsVC.openHours = [self convertOpenHoursArrayToDictionary:openHours];
                 [aboutUsVC.tableView reloadData];
             } error:^(Fault *f) {
