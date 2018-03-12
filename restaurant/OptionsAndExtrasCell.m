@@ -14,7 +14,6 @@
 
 - (IBAction)selectedSwitchAction:(id)sender {
     NSIndexPath *indexPath = [((UITableView *)self.superview) indexPathForCell:self];
-    
     if (indexPath.section == 2) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", self.optionLabel.text];
         StandardOption *standardOption = [self.menuItem.standardOptions filteredArrayUsingPredicate:predicate].firstObject;
@@ -25,9 +24,7 @@
             standardOption.selected = @0;
         }
     }
-    
-    else if (indexPath.section == 3) {
-        
+    else if (indexPath.section == 3) {        
         NSRange range = [self.optionLabel.text rangeOfString:@":"];
         NSString *predicateString = [self.optionLabel.text substringToIndex:range.location];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", predicateString];

@@ -4,10 +4,9 @@
 
 @interface OptionsAndExtrasCell : UITableViewCell
 
-@property (strong, nonatomic) MenuItem *menuItem;
-
 @property (weak, nonatomic) IBOutlet UILabel *optionLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *selectedSwitch;
+@property (strong, nonatomic) MenuItem *menuItem;
 
 - (IBAction)selectedSwitchAction:(id)sender;
 

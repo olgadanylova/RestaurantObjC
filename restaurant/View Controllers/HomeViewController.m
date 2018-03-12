@@ -1,22 +1,22 @@
 
 #import "HomeViewController.h"
+#import "AlertViewController.h"
 #import "ItemsViewController.h"
 #import "AboutUsViewController.h"
+#import "UserDefaultsHelper.h"
 #import "ColorHelper.h"
 #import "Backendless.h"
 #import "MenuItem.h"
-#import "Category.h"
 #import "Article.h"
+#import "Category.h"
 #import "Business.h"
 #import "OpenHoursInfo.h"
-#import "AlertViewController.h"
 
 #define FAVORITES @"★ Favorites"
 #define SHOPPING_CART @"🛒 Shopping Cart"
 #define ABOUT @"ℹ About us"
 #define LOGOUT @"← Logout"
 #define ARTICLES @"📰 Articles"
-
 
 @interface HomeViewController() {
     NSArray *favoritesAndCart;
@@ -31,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    
     [[backendless.data of:[Category class]] find:^(NSArray *categotyArray) {
         categories = [NSMutableArray new];
         for (Category *category in categotyArray) {
@@ -41,7 +40,6 @@
     } error:^(Fault *fault) {
         [AlertViewController showErrorAlert:fault target:self handler:nil];
     }];
-    
     favoritesAndCart = @[FAVORITES, SHOPPING_CART];
     news = @[ARTICLES];
     other = @[ABOUT, LOGOUT];
@@ -71,10 +69,10 @@
     if (section == 1) {
         return @"Categories";
     }
-    if (section == 2) {
+    else if (section == 2) {
         return @"News";
     }
-    if (section == 3) {
+    else if (section == 3) {
         return @"Other";
     }
     return nil;
@@ -95,26 +93,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
-    
     if (indexPath.section == 0) {
         cell.textLabel.text = [favoritesAndCart objectAtIndex:indexPath.row];
     }
-    if (indexPath.section == 1) {
+    else if (indexPath.section == 1) {
         cell.textLabel.text = [categories objectAtIndex:indexPath.row];
     }
-    if (indexPath.section == 2) {
+    else if (indexPath.section == 2) {
         cell.textLabel.text = [news objectAtIndex:indexPath.row];
     }
-    if (indexPath.section == 3) {
+    else if (indexPath.section == 3) {
         cell.textLabel.text = [other objectAtIndex:indexPath.row];
     }
-    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [self performSegueWithIdentifier:@"ShowItems" sender:cell];
@@ -132,13 +127,11 @@
     else if (indexPath.section == 3 && [cell.textLabel.text isEqualToString:ABOUT]) {
         [self performSegueWithIdentifier:@"ShowAbout" sender:cell];
     }
-    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UITableViewCell *cell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
     if (indexPath.section == 0) {
         UINavigationController *navController = [segue destinationViewController];
         if ([segue.identifier isEqualToString:@"ShowItems"]) {
@@ -146,19 +139,16 @@
             itemsVC.navigationItem.title = @"Favorites";
         }
     }
-    
     else if (indexPath.section == 1) {
         UINavigationController *navController = [segue destinationViewController];
         ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
         itemsVC.navigationItem.title = [cell.textLabel.text substringFromIndex:2];
     }
-    
     else if (indexPath.section == 2) {
         UINavigationController *navController = [segue destinationViewController];
         ItemsViewController *itemsVC = (ItemsViewController *)[navController topViewController];
         itemsVC.navigationItem.title = @"News";
     }
-    
     else if (indexPath.section == 3 && [segue.identifier isEqualToString:@"ShowAbout"]) {
         [[backendless.data of:[Business class]] find:^(NSArray *business) {
             [[backendless.data of:[OpenHoursInfo class]] find:^(NSArray *openHours) {
@@ -170,18 +160,16 @@
             } error:^(Fault *f) {
             }];
         } error:^(Fault *f) {
-        }];   
+        }];
     }
 }
 
 -(NSDictionary *)convertOpenHoursArrayToDictionary:(NSArray *)openHoursArray {
-    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];
-    
+    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];    
     for (OpenHoursInfo *openHoursInfo in openHoursArray) {
         NSNumber *day = openHoursInfo.day;
         NSDate *openAt = openHoursInfo.openAt;
         NSDate *closeAt = openHoursInfo.closeAt;
-        
         if (![openHoursDictionary objectForKey:day]) {
             NSString *openClose = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
             [openHoursDictionary setObject:openClose forKey:[self stringFromWeekday:[day integerValue]]];

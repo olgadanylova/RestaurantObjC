@@ -44,31 +44,32 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShoppingCartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShoppingCartCell" forIndexPath:indexPath];
     ShoppingCartItem *shoppingCartItem = [shoppingCart.shoppingCartItems objectAtIndex:indexPath.row];
-    
     cell.quantityTextField.text = [NSString stringWithFormat:@"%@", shoppingCartItem.quantity];
     cell.shoppingCartItem = shoppingCartItem;
-    Picture *picture = shoppingCartItem.menuItem.pictures.firstObject;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            cell.pictureView.image = image;
-        });
-    });
-    
     cell.titleLabel.text = shoppingCartItem.menuItem.title;
     cell.descriptionLabel.text = shoppingCartItem.menuItem.body;
     
-    Price *price = shoppingCartItem.menuItem.prices.firstObject;
+    Picture *picture = shoppingCartItem.menuItem.pictures.firstObject;
+    if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
+        cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:picture.url];
+    }
+    else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
+            [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.pictureView.image = image;
+            });
+        });
+    }    
     
-    cell.quantityTextField.text = [NSString stringWithFormat:@"%@", shoppingCartItem.quantity];
+    Price *price = shoppingCartItem.menuItem.prices.firstObject;
     cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%@ x %@ %@", price.currency, price.value, shoppingCartItem.quantity, price.name];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(selected = 1)"];
     NSMutableArray *standardOptions = [NSMutableArray arrayWithArray:[shoppingCartItem.menuItem.standardOptions filteredArrayUsingPredicate:predicate]];
     NSMutableArray *extraOptions = [NSMutableArray arrayWithArray:[shoppingCartItem.menuItem.extraOptions filteredArrayUsingPredicate:predicate]];
-    
     NSString *optionsString = @"";
-    
     for (StandardOption *standardOption in standardOptions) {
         optionsString = [optionsString stringByAppendingString:[NSString stringWithFormat:@"%@: $0\n", standardOption.name]];
     }
@@ -78,13 +79,11 @@
     if ([optionsString length] > 0) {
         optionsString = [optionsString substringToIndex:[optionsString length] - 1];
     }
-    
     cell.optionsLabel.text = optionsString;
     cell.totalLabel.text = [NSString stringWithFormat:@"Total: %@%@", price.currency, [NSNumber numberWithDouble:[shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]]];
     
     shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]) + [shoppingCart.totalPrice doubleValue]];
     self.proceedToPaymentButton.title = [NSString stringWithFormat:@"Proceed to payment: $%@", shoppingCart.totalPrice];
-    
     return cell;
 }
 

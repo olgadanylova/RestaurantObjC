@@ -1,13 +1,13 @@
 
 #import "ItemDetailsViewController.h"
+#import "AlertViewController.h"
 #import "ItemInfoCell.h"
 #import "OptionsAndExtrasCell.h"
 #import "SizeAndPriceCell.h"
-#import "ColorHelper.h"
 #import "UserDefaultsHelper.h"
+#import "ColorHelper.h"
 #import "Article.h"
 #import "MenuItem.h"
-#import "AlertViewController.h"
 
 #define ADD_TO_FAV @"Add to favorites"
 #define REMOVE_FROM_FAV @"Remove from favorites"
@@ -28,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.table.tableFooterView = [UIView new];
-    
     if ([self.item isKindOfClass:[MenuItem class]]) {
         menuItem = self.item;
         menuItemOptions = menuItem.standardOptions;
@@ -107,10 +106,10 @@
     if (section == 2) {
         return @"Options";
     }
-    if (section == 3) {
+    else if (section == 3) {
         return @"Extras";
     }
-    if (section == 4) {
+    else if (section == 4) {
         return @"Size and prices";
     }
     return nil;
@@ -145,33 +144,45 @@
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
         if ([self.item isKindOfClass:[MenuItem class]]) {
             Picture *picture = menuItem.pictures.firstObject;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                    cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+            if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:picture.url]];
+                cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+            }
+            else {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
+                    [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cell.backgroundView = [[UIImageView alloc] initWithImage:image];
+                        cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+                    });
                 });
-            });
+            }
         }
         else if ([self.item isKindOfClass:[Article class]]) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                    cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+            if ([userDefaultsHelper getImageFromUserDefaults:article.picture.url]) {
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:article.picture.url]];
+                cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+            }
+            else {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
+                    [userDefaultsHelper saveImageToUserDefaults:image withKey:article.picture.url];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cell.backgroundView = [[UIImageView alloc] initWithImage:image];
+                        cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+                    });
                 });
-            });
+            }
         }
         return cell;
     }
-    
     else if (indexPath.section == 1) {
         ItemInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemInfoCell" forIndexPath:indexPath];
         cell.userInteractionEnabled = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([self.item isKindOfClass:[MenuItem class]]) {
             cell.titleLabel.text = menuItem.title;
-            
             NSString *tagsString = @"• ";
             for (Tag *tag in menuItem.tags) {
                 tagsString = [tagsString stringByAppendingString:[NSString stringWithFormat:@"%@, ", tag.name]];
@@ -189,7 +200,6 @@
         }
         return cell;
     }
-    
     else if (indexPath.section == 2) {
         OptionsAndExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OptionCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -199,7 +209,6 @@
         [cell.selectedSwitch setOn:[option.selected boolValue]];
         return cell;
     }
-    
     else if (indexPath.section == 3) {
         OptionsAndExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExtraCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -209,7 +218,6 @@
         [cell.selectedSwitch setOn: [extra.selected boolValue]];
         return cell;
     }
-    
     else if (indexPath.section == 4) {
         SizeAndPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SizeAndPriceCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -256,8 +264,7 @@
     @catch (NSException *exception) {
         Fault *fault = [Fault fault:exception.name detail:exception.reason];
         [AlertViewController showErrorAlert:fault target:self handler:nil];
-    }
-    
+    }    
 }
 
 - (IBAction)pressedAddToFavorites:(id)sender {

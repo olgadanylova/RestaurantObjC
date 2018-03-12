@@ -3,6 +3,7 @@
 
 #define FAVORITES_KEY @"restaurantFavorites"
 #define SHOPPING_CART_KEY @"restaurantShoppingCart"
+#define IMAGES_KEY @"restaurantImages"
 
 @implementation UserDefaultsHelper
 
@@ -251,28 +252,40 @@
     return [NSMutableArray new];
 }
 
--(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem {
-    NSMutableArray *shoppingCartItems = [self getShoppingCartItems];
-    BOOL equal = YES;
+-(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem atIndex:(NSInteger)index {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
     
-    for (ShoppingCartItem *item in shoppingCartItems) {
-        if ([item.price isEqual:shoppingCartItem.price]) {
-            
-            
-            
-            
-            if ([item.menuItem.objectId isEqualToString:shoppingCartItem.menuItem.objectId]) {
-            }
-            
-            
-            // item.quanity = ///
-            
-            
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+    // ищем в shoppingCartItems нужный объект (по индексу)
+    ShoppingCartItem *cartItem = [shoppingCartItems objectAtIndex:index];
+    cartItem.quantity = shoppingCartItem.quantity;
+    
+    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)saveImageToUserDefaults:(UIImage *)image withKey:(NSString *)key { 
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:IMAGES_KEY];
+    NSMutableDictionary *images = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    if (!images) {
+        images = [NSMutableDictionary new];
     }
+    if (![images objectForKey:key]) {
+        [images setObject:image forKey:key];
+        data = [NSKeyedArchiver archivedDataWithRootObject:images];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:IMAGES_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+-(UIImage *)getImageFromUserDefaults:(NSString *)key {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:IMAGES_KEY];
+    NSMutableDictionary *images = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    if (images) {
+        return [images valueForKey:key];
+    }
+    return nil;
 }
 
 @end

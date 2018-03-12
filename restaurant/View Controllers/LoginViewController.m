@@ -23,7 +23,6 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
 }
 
 - (IBAction)pressedEnterTheApp:(id)sender {
@@ -31,7 +30,6 @@
 }
 
 - (IBAction)pressedLoginWithFacebook:(id)sender {
-    
 }
 
 -(IBAction)unwindToLoginVC:(UIStoryboardSegue *)segue {

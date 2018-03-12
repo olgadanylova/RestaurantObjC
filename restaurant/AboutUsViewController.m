@@ -1,8 +1,9 @@
 
 #import "AboutUsViewController.h"
-#import "ColorHelper.h"
-#import "RestaurantInfoCell.h"
 #import "MapViewController.h"
+#import "RestaurantInfoCell.h"
+#import "UserDefaultsHelper.h"
+#import "ColorHelper.h"
 
 #define CALL_US @"✆ Call us"
 #define SEND_EMAIL @"✉️ Send email"
@@ -10,7 +11,6 @@
 #define TWITTER @"• Follow us on Twitter"
 #define INSTAGRAM @"• Follow us on Instagram"
 #define PINTEREST @"• Follow us on Pinterest"
-
 
 @interface AboutUsViewController() {
     NSArray *contacts;
@@ -80,27 +80,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"RestaurantImageCell"];
         cell.userInteractionEnabled = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"waitingImage.png"]];
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-        
         uint32_t randomIndex = arc4random_uniform((uint32_t)[self.business.welcomeImages count]);
         Picture *picture = [self.business.welcomeImages objectAtIndex:randomIndex];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+        if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
+            cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:picture.url]];
+            cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+        }
+        else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
+                if (image && picture.url) {
+                    NSLog(@"%@, %@", image, picture.url);
+                    [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.backgroundView = [[UIImageView alloc] initWithImage:image];
+                    cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+                });
             });
-        });
+        }
         return cell;
     }
-    
-    if (indexPath.section == 1) {
+    else if (indexPath.section == 1) {
         RestaurantInfoCell *cell = (RestaurantInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"RestaurantInfoCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.storeNameLabel.text = self.business.storeName;

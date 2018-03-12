@@ -1,13 +1,13 @@
 
 #import "ItemsViewController.h"
 #import "ItemDetailsViewController.h"
+#import "AlertViewController.h"
 #import "ItemCell.h"
+#import "UserDefaultsHelper.h"
+#import "ColorHelper.h"
+#import "Backendless.h"
 #import "MenuItem.h"
 #import "Article.h"
-#import "Backendless.h"
-#import "ColorHelper.h"
-#import "UserDefaultsHelper.h"
-#import "AlertViewController.h"
 
 @interface ItemsViewController() {
     NSArray *items;
@@ -62,32 +62,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-    
     if ([items.firstObject isKindOfClass:[MenuItem class]]) {
         MenuItem *menuItem = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = menuItem.title;
         cell.descriptionLabel.text = menuItem.body;
         Picture *picture = menuItem.pictures.firstObject;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.pictureView.image = image;
+        if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
+            cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:picture.url];
+        }
+        else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
+                [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.pictureView.image = image;
+                });
             });
-        });
+        }
     }
-    
     else if ([items.firstObject isKindOfClass:[Article class]]) {
         Article *article = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = article.title;
         cell.descriptionLabel.text = article.body;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.pictureView.image = image;
+        if ([userDefaultsHelper getImageFromUserDefaults:article.picture.url]) {
+            cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:article.picture.url];
+        }
+        else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
+                [userDefaultsHelper saveImageToUserDefaults:image withKey:article.picture.url];
+                dispatch_async(dispatch_get_main_queue(), ^{                    
+                    cell.pictureView.image = image;
+                });
             });
-        });
-    }
-    
+        }
+    }    
     return cell;
 }
 

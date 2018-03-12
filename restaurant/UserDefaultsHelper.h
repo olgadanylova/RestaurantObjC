@@ -1,5 +1,6 @@
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "MenuItem.h"
 #import "ShoppingCartItem.h"
 
@@ -16,7 +17,9 @@
 -(void)addItemToShoppingCart:(MenuItem *)menuItem;
 -(void)removeItemFromShoppingCart:(MenuItem *)menuItem;
 -(NSMutableArray *)getShoppingCartItems;
+-(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem atIndex:(NSInteger)index;
 
--(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem;
+-(void)saveImageToUserDefaults:(UIImage *)image withKey:(NSString *)key;
+-(UIImage *)getImageFromUserDefaults:(NSString *)key;
 
 @end
