@@ -4,28 +4,25 @@
 #import "MapViewController.h"
 #import "RestaurantInfoCell.h"
 #import "InputCell.h"
+#import "ColorHelper.h"
 #import "Backendless.h"
-
-@interface DineInAndTakeAwayViewController() {
-    NSArray *questions;
-}
-@end
 
 @implementation DineInAndTakeAwayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    
-    if ([self.navigationItem.title isEqualToString:@"🥡 Take away"]) {
-        questions = @[@"Full name", @"Email", @"Phone number"];
-    }
-    else if ([self.navigationItem.title isEqualToString:@"🍽 Dine in"]) {
-        questions = @[@"Table", @"Email", @"Phone number", @"Order notes"];
-    }
 }
 
-#pragma mark - Table view data source
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -36,9 +33,29 @@
         return 1;
     }
     else if (section == 1) {
-        return [questions count];
+        return [self.questionsForDelivery count];
     }
     return 0;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return @"Order info";
+    }
+    return nil;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return 1.5 * self.tableView.sectionHeaderHeight;
+    }
+    return 0;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    view.tintColor = [colorHelper getColorFromHex:@"#FF9300" withAlpha:1];
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    header.textLabel.textColor = [UIColor whiteColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,8 +69,8 @@
     }
     else if (indexPath.section == 1) {
         InputCell *cell = (InputCell *)[tableView dequeueReusableCellWithIdentifier:@"InputCell"];
-        cell.titleLabel.text = [questions objectAtIndex:indexPath.row];
-        cell.inputField.placeholder = [questions objectAtIndex:indexPath.row];
+        cell.titleLabel.text = [self.questionsForDelivery objectAtIndex:indexPath.row];
+        cell.inputView.text = [self.questionsForDelivery objectAtIndex:indexPath.row];
         return cell;
     }
     return nil;

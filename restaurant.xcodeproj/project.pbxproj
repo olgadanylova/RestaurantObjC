@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01EF40726BA3AFD502A461D0 /* Pods_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7CFE392966A1C3A0606342 /* Pods_restaurant.framework */; };
 		0F7A63311E769BB6007B6B07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A63301E769BB6007B6B07 /* main.m */; };
 		0F7A63341E769BB6007B6B07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7A63331E769BB6007B6B07 /* AppDelegate.m */; };
 		0F7A633A1E769BB6007B6B07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7A63381E769BB6007B6B07 /* Main.storyboard */; };
@@ -15,6 +16,10 @@
 		5A2CD208204E88B700BDA138 /* UserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD207204E88B700BDA138 /* UserDefaultsHelper.m */; };
 		5A2CD236204ECDCE00BDA138 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD235204ECDCE00BDA138 /* AboutUsViewController.m */; };
 		5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */; };
+		5A353FB02056B83600C55347 /* DeliveryMethodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */; };
+		5A353FB42056BC8D00C55347 /* DeliveryMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FB32056BC8C00C55347 /* DeliveryMethod.m */; };
+		5A353FB92056C6DE00C55347 /* DineInAndTakeAwayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */; };
+		5A353FBC2056CA0F00C55347 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FBB2056CA0F00C55347 /* InputCell.m */; };
 		5A5EEF992046A8F7004EB70B /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5EEF982046A8F7004EB70B /* ItemCell.m */; };
 		5A909BFF204FE1CD00184B13 /* ShoppingCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */; };
 		5A909C02204FE64100184B13 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A909C01204FE64100184B13 /* ShoppingCartViewController.m */; };
@@ -47,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D7CFE392966A1C3A0606342 /* Pods_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7A632C1E769BB6007B6B07 /* restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = restaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7A63301E769BB6007B6B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F7A63321E769BB6007B6B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,10 +67,18 @@
 		5A2CD235204ECDCE00BDA138 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		5A2CD237204ED34F00BDA138 /* RestaurantInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestaurantInfoCell.h; sourceTree = "<group>"; };
 		5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfoCell.m; sourceTree = "<group>"; };
+		5A353FAE2056B83600C55347 /* DeliveryMethodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryMethodsViewController.h; sourceTree = "<group>"; };
+		5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryMethodsViewController.m; sourceTree = "<group>"; };
+		5A353FB22056BC8C00C55347 /* DeliveryMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryMethod.h; sourceTree = "<group>"; };
+		5A353FB32056BC8C00C55347 /* DeliveryMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryMethod.m; sourceTree = "<group>"; };
+		5A353FB72056C6DE00C55347 /* DineInAndTakeAwayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DineInAndTakeAwayViewController.h; sourceTree = "<group>"; };
+		5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DineInAndTakeAwayViewController.m; sourceTree = "<group>"; };
+		5A353FBA2056CA0F00C55347 /* InputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
+		5A353FBB2056CA0F00C55347 /* InputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
 		5A5EEF972046A8F7004EB70B /* ItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
 		5A5EEF982046A8F7004EB70B /* ItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		5A909BFD204FE1CD00184B13 /* ShoppingCartCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartCell.h; sourceTree = "<group>"; };
-		5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartCell.m; sourceTree = "<group>"; };
+		5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartCell.m; sourceTree = "<group>"; wrapsLines = 0; };
 		5A909C00204FE64100184B13 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
 		5A909C01204FE64100184B13 /* ShoppingCartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartViewController.m; sourceTree = "<group>"; };
 		5AA7599920494CD700958134 /* ItemInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemInfoCell.h; sourceTree = "<group>"; };
@@ -366,6 +380,8 @@
 		5E743B6D2050A13C0091033A /* ShoppingCart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCart.m; sourceTree = "<group>"; };
 		5E743B6F2050A1E30091033A /* ShoppingCartItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartItem.h; sourceTree = "<group>"; };
 		5E743B702050A1E30091033A /* ShoppingCartItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartItem.m; sourceTree = "<group>"; };
+		989CB229D0700843DFFEC669 /* Pods-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
+		BD6D0AF3F2B4F33DAB527916 /* Pods-restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ABE8A502045586100211CF5 /* backendless.a in Frameworks */,
+				01EF40726BA3AFD502A461D0 /* Pods_restaurant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +403,8 @@
 				5ABE89542045586000211CF5 /* lib */,
 				0F7A632E1E769BB6007B6B07 /* restaurant */,
 				0F7A632D1E769BB6007B6B07 /* Products */,
+				8FC709DE4310452AEAD26D53 /* Pods */,
+				290A380AC4FA972FFC1E3D94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -400,9 +419,10 @@
 		0F7A632E1E769BB6007B6B07 /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				5ABE8A702045926F00211CF5 /* Data */,
 				5ABE8A51204558A000211CF5 /* View Controllers */,
 				5ABE8AAA2045BC9E00211CF5 /* Cells */,
+				5ABE8A702045926F00211CF5 /* Data */,
+				5A353FB12056BC4200C55347 /* DeliveryMethod */,
 				5E2407A4204F2B3C00E82A86 /* Map */,
 				5E743B722050A1F10091033A /* Shopping Cart */,
 				5A2CD205204E888700BDA138 /* Utils */,
@@ -425,6 +445,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		290A380AC4FA972FFC1E3D94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D7CFE392966A1C3A0606342 /* Pods_restaurant.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5A2CD205204E888700BDA138 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +462,15 @@
 				5A2CD207204E88B700BDA138 /* UserDefaultsHelper.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		5A353FB12056BC4200C55347 /* DeliveryMethod */ = {
+			isa = PBXGroup;
+			children = (
+				5A353FB22056BC8C00C55347 /* DeliveryMethod.h */,
+				5A353FB32056BC8C00C55347 /* DeliveryMethod.m */,
+			);
+			name = DeliveryMethod;
 			sourceTree = "<group>";
 		};
 		5ABE89542045586000211CF5 /* lib */ = {
@@ -729,6 +766,10 @@
 				5E24079F204F286400E82A86 /* MapViewController.m */,
 				5A909C00204FE64100184B13 /* ShoppingCartViewController.h */,
 				5A909C01204FE64100184B13 /* ShoppingCartViewController.m */,
+				5A353FAE2056B83600C55347 /* DeliveryMethodsViewController.h */,
+				5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */,
+				5A353FB72056C6DE00C55347 /* DineInAndTakeAwayViewController.h */,
+				5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -777,6 +818,8 @@
 				5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */,
 				5A909BFD204FE1CD00184B13 /* ShoppingCartCell.h */,
 				5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */,
+				5A353FBA2056CA0F00C55347 /* InputCell.h */,
+				5A353FBB2056CA0F00C55347 /* InputCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -801,6 +844,15 @@
 			name = "Shopping Cart";
 			sourceTree = "<group>";
 		};
+		8FC709DE4310452AEAD26D53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				989CB229D0700843DFFEC669 /* Pods-restaurant.debug.xcconfig */,
+				BD6D0AF3F2B4F33DAB527916 /* Pods-restaurant.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -808,9 +860,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F7A63431E769BB6007B6B07 /* Build configuration list for PBXNativeTarget "restaurant" */;
 			buildPhases = (
+				0A18B85506B5E66E250856AE /* [CP] Check Pods Manifest.lock */,
 				0F7A63281E769BB6007B6B07 /* Sources */,
 				0F7A63291E769BB6007B6B07 /* Frameworks */,
 				0F7A632A1E769BB6007B6B07 /* Resources */,
+				15DDE2CFB0A0092C2A21C6A4 /* [CP] Embed Pods Frameworks */,
+				2AFDC4B1ECB9DAD00C7451DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -867,6 +922,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A18B85506B5E66E250856AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-restaurant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		15DDE2CFB0A0092C2A21C6A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2AFDC4B1ECB9DAD00C7451DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0F7A63281E769BB6007B6B07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -875,6 +986,7 @@
 				5ABE8A8B204592D000211CF5 /* Tag.m in Sources */,
 				0F7A63341E769BB6007B6B07 /* AppDelegate.m in Sources */,
 				5AB2E6902048622A0040E45F /* ItemDetailsViewController.m in Sources */,
+				5A353FB42056BC8D00C55347 /* DeliveryMethod.m in Sources */,
 				5E743B712050A1E30091033A /* ShoppingCartItem.m in Sources */,
 				5ABE8A8F204592D000211CF5 /* Category.m in Sources */,
 				5ABE8A8E204592D000211CF5 /* StandardOption.m in Sources */,
@@ -885,8 +997,10 @@
 				5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */,
 				5ABE8A88204592D000211CF5 /* Article.m in Sources */,
 				5ABE8A90204592D000211CF5 /* ExtraOption.m in Sources */,
+				5A353FBC2056CA0F00C55347 /* InputCell.m in Sources */,
 				5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */,
 				5A909BFF204FE1CD00184B13 /* ShoppingCartCell.m in Sources */,
+				5A353FB02056B83600C55347 /* DeliveryMethodsViewController.m in Sources */,
 				5A2CD236204ECDCE00BDA138 /* AboutUsViewController.m in Sources */,
 				5ABE8A8C204592D000211CF5 /* Business.m in Sources */,
 				5AA7599B20494CD700958134 /* ItemInfoCell.m in Sources */,
@@ -894,6 +1008,7 @@
 				5A2CD208204E88B700BDA138 /* UserDefaultsHelper.m in Sources */,
 				5A909C02204FE64100184B13 /* ShoppingCartViewController.m in Sources */,
 				5ABE8A8A204592D000211CF5 /* Picture.m in Sources */,
+				5A353FB92056C6DE00C55347 /* DineInAndTakeAwayViewController.m in Sources */,
 				0F7A63311E769BB6007B6B07 /* main.m in Sources */,
 				5ABE8A91204592D000211CF5 /* Map.m in Sources */,
 				5ABE8A89204592D000211CF5 /* OpenHoursInfo.m in Sources */,
@@ -1032,6 +1147,7 @@
 		};
 		0F7A63441E769BB6007B6B07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 989CB229D0700843DFFEC669 /* Pods-restaurant.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1051,6 +1167,7 @@
 		};
 		0F7A63451E769BB6007B6B07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD6D0AF3F2B4F33DAB527916 /* Pods-restaurant.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
