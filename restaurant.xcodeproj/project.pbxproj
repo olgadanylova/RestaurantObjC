@@ -18,8 +18,6 @@
 		5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */; };
 		5A353FB02056B83600C55347 /* DeliveryMethodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */; };
 		5A353FB42056BC8D00C55347 /* DeliveryMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FB32056BC8C00C55347 /* DeliveryMethod.m */; };
-		5A353FB92056C6DE00C55347 /* DineInAndTakeAwayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */; };
-		5A353FBC2056CA0F00C55347 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A353FBB2056CA0F00C55347 /* InputCell.m */; };
 		5A5EEF992046A8F7004EB70B /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5EEF982046A8F7004EB70B /* ItemCell.m */; };
 		5A909BFF204FE1CD00184B13 /* ShoppingCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */; };
 		5A909C02204FE64100184B13 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A909C01204FE64100184B13 /* ShoppingCartViewController.m */; };
@@ -44,6 +42,9 @@
 		5ABE8A9C204592DC00211CF5 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A95204592DB00211CF5 /* SplitViewController.m */; };
 		5ABE8A9D204592DC00211CF5 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A98204592DC00211CF5 /* ItemsViewController.m */; };
 		5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8AA42045B83C00211CF5 /* ColorHelper.m */; };
+		5AD55D682059188A00A25024 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD55D672059188A00A25024 /* TextFieldCell.m */; };
+		5AD55D6C205918C100A25024 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD55D6B205918C100A25024 /* DeliveryViewController.m */; };
+		5AD55D7020591E4F00A25024 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD55D6F20591E4F00A25024 /* TextViewCell.m */; };
 		5E2407A0204F286400E82A86 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E24079F204F286400E82A86 /* MapViewController.m */; };
 		5E2407A7204F2B4B00E82A86 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2407A6204F2B4B00E82A86 /* MapPin.m */; };
 		5E3B418120504841004D2FF6 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B418020504841004D2FF6 /* AlertViewController.m */; };
@@ -71,10 +72,6 @@
 		5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryMethodsViewController.m; sourceTree = "<group>"; };
 		5A353FB22056BC8C00C55347 /* DeliveryMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryMethod.h; sourceTree = "<group>"; };
 		5A353FB32056BC8C00C55347 /* DeliveryMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryMethod.m; sourceTree = "<group>"; };
-		5A353FB72056C6DE00C55347 /* DineInAndTakeAwayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DineInAndTakeAwayViewController.h; sourceTree = "<group>"; };
-		5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DineInAndTakeAwayViewController.m; sourceTree = "<group>"; };
-		5A353FBA2056CA0F00C55347 /* InputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
-		5A353FBB2056CA0F00C55347 /* InputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
 		5A5EEF972046A8F7004EB70B /* ItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
 		5A5EEF982046A8F7004EB70B /* ItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		5A909BFD204FE1CD00184B13 /* ShoppingCartCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartCell.h; sourceTree = "<group>"; };
@@ -370,6 +367,12 @@
 		5ABE8A99204592DC00211CF5 /* SplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplitViewController.h; path = "View Controllers/SplitViewController.h"; sourceTree = "<group>"; };
 		5ABE8AA42045B83C00211CF5 /* ColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHelper.m; sourceTree = "<group>"; };
 		5ABE8AA52045B83C00211CF5 /* ColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
+		5AD55D662059188A00A25024 /* TextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		5AD55D672059188A00A25024 /* TextFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		5AD55D6A205918C100A25024 /* DeliveryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
+		5AD55D6B205918C100A25024 /* DeliveryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
+		5AD55D6E20591E4F00A25024 /* TextViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
+		5AD55D6F20591E4F00A25024 /* TextViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		5E24079E204F286400E82A86 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		5E24079F204F286400E82A86 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		5E2407A5204F2B4B00E82A86 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
@@ -768,8 +771,8 @@
 				5A909C01204FE64100184B13 /* ShoppingCartViewController.m */,
 				5A353FAE2056B83600C55347 /* DeliveryMethodsViewController.h */,
 				5A353FAF2056B83600C55347 /* DeliveryMethodsViewController.m */,
-				5A353FB72056C6DE00C55347 /* DineInAndTakeAwayViewController.h */,
-				5A353FB82056C6DE00C55347 /* DineInAndTakeAwayViewController.m */,
+				5AD55D6A205918C100A25024 /* DeliveryViewController.h */,
+				5AD55D6B205918C100A25024 /* DeliveryViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -818,8 +821,10 @@
 				5A2CD238204ED34F00BDA138 /* RestaurantInfoCell.m */,
 				5A909BFD204FE1CD00184B13 /* ShoppingCartCell.h */,
 				5A909BFE204FE1CD00184B13 /* ShoppingCartCell.m */,
-				5A353FBA2056CA0F00C55347 /* InputCell.h */,
-				5A353FBB2056CA0F00C55347 /* InputCell.m */,
+				5AD55D662059188A00A25024 /* TextFieldCell.h */,
+				5AD55D672059188A00A25024 /* TextFieldCell.m */,
+				5AD55D6E20591E4F00A25024 /* TextViewCell.h */,
+				5AD55D6F20591E4F00A25024 /* TextViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -986,6 +991,7 @@
 				5ABE8A8B204592D000211CF5 /* Tag.m in Sources */,
 				0F7A63341E769BB6007B6B07 /* AppDelegate.m in Sources */,
 				5AB2E6902048622A0040E45F /* ItemDetailsViewController.m in Sources */,
+				5AD55D7020591E4F00A25024 /* TextViewCell.m in Sources */,
 				5A353FB42056BC8D00C55347 /* DeliveryMethod.m in Sources */,
 				5E743B712050A1E30091033A /* ShoppingCartItem.m in Sources */,
 				5ABE8A8F204592D000211CF5 /* Category.m in Sources */,
@@ -997,8 +1003,8 @@
 				5A2CD239204ED34F00BDA138 /* RestaurantInfoCell.m in Sources */,
 				5ABE8A88204592D000211CF5 /* Article.m in Sources */,
 				5ABE8A90204592D000211CF5 /* ExtraOption.m in Sources */,
-				5A353FBC2056CA0F00C55347 /* InputCell.m in Sources */,
 				5ABE8AA62045B83C00211CF5 /* ColorHelper.m in Sources */,
+				5AD55D682059188A00A25024 /* TextFieldCell.m in Sources */,
 				5A909BFF204FE1CD00184B13 /* ShoppingCartCell.m in Sources */,
 				5A353FB02056B83600C55347 /* DeliveryMethodsViewController.m in Sources */,
 				5A2CD236204ECDCE00BDA138 /* AboutUsViewController.m in Sources */,
@@ -1008,9 +1014,9 @@
 				5A2CD208204E88B700BDA138 /* UserDefaultsHelper.m in Sources */,
 				5A909C02204FE64100184B13 /* ShoppingCartViewController.m in Sources */,
 				5ABE8A8A204592D000211CF5 /* Picture.m in Sources */,
-				5A353FB92056C6DE00C55347 /* DineInAndTakeAwayViewController.m in Sources */,
 				0F7A63311E769BB6007B6B07 /* main.m in Sources */,
 				5ABE8A91204592D000211CF5 /* Map.m in Sources */,
+				5AD55D6C205918C100A25024 /* DeliveryViewController.m in Sources */,
 				5ABE8A89204592D000211CF5 /* OpenHoursInfo.m in Sources */,
 				5E2407A0204F286400E82A86 /* MapViewController.m in Sources */,
 				5A5EEF992046A8F7004EB70B /* ItemCell.m in Sources */,

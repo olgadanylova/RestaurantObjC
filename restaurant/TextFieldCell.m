@@ -1,7 +1,7 @@
 
-#import "InputCell.h"
+#import "TextFieldCell.h"
 
-@implementation InputCell
+@implementation TextFieldCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
