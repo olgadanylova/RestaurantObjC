@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "Business.h"
 
-@interface DeliveryViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate>
+@interface DeliveryViewController : UITableViewController <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *confirmButton;
 @property (strong, nonatomic) Business *business;
