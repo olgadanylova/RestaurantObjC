@@ -1,5 +1,6 @@
 
 #import <UIKit/UIKit.h>
+#import "ShoppingCart.h"
 
 @interface ShoppingCartViewController : UITableViewController
 

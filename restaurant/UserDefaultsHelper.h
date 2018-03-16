@@ -16,6 +16,7 @@
 
 -(void)addItemToShoppingCart:(MenuItem *)menuItem;
 -(void)removeItemFromShoppingCart:(MenuItem *)menuItem;
+-(void)removeAllItemsFromShoppingCart;
 -(NSMutableArray *)getShoppingCartItems;
 -(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem atIndex:(NSInteger)index;
 

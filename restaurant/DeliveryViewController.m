@@ -37,7 +37,15 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([self.navigationItem.title isEqualToString:TAKE_AWAY]) {
+    if ([self.navigationItem.title isEqualToString:HOME_DELIVERY]) {
+        emailFields = [NSMutableDictionary dictionaryWithDictionary:@{@"Restaurant"     :   self.business,
+                                                                      @"Full name"      :   @"",
+                                                                      @"Email"          :   @"",
+                                                                      @"Phone number"   :   @"",
+                                                                      @"City"           :   @"",
+                                                                      @"Address"        :   @""}];
+    }
+    else if ([self.navigationItem.title isEqualToString:TAKE_AWAY]) {
         emailFields = [NSMutableDictionary dictionaryWithDictionary:@{@"Restaurant"     :   self.business,
                                                                       @"Full name"      :   @"",
                                                                       @"Email"          :   @"",
@@ -58,10 +66,8 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if ([self.navigationItem.title isEqualToString:HOME_DELIVERY]) {
-        return 0;
-    }
-    if ([self.navigationItem.title isEqualToString:TAKE_AWAY]) {
+    if ([self.navigationItem.title isEqualToString:HOME_DELIVERY] ||
+        [self.navigationItem.title isEqualToString:TAKE_AWAY]) {
         return 2;
     }
     else if ([self.navigationItem.title isEqualToString:DINE_IN]) {
@@ -72,9 +78,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if ([self.navigationItem.title isEqualToString:HOME_DELIVERY]) {
-            return 0;
-        }
         return 1;
     }
     else if (section == 1) {
@@ -88,7 +91,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return @"Fill the necessary fields";
+        return @"Order details";
     }
     return nil;
 }
@@ -117,7 +120,6 @@
     else if (indexPath.section == 1) {
         TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldCell" forIndexPath:indexPath];
         cell.textField.placeholder = [self.inputFields objectAtIndex:indexPath.row];
-        
         if ([cell.textField.placeholder isEqualToString:@"Phone number"]) {
             [cell.textField setTextContentType:UITextContentTypeTelephoneNumber];
             [cell.textField setKeyboardType:UIKeyboardTypePhonePad];
@@ -127,7 +129,6 @@
             [cell.textField setKeyboardType:UIKeyboardTypeEmailAddress];
             cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         }
-        
         [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
@@ -190,95 +191,39 @@
 }
 
 - (IBAction)pressedConfirmButton:(id)sender {
-    if ([self.navigationItem.title isEqualToString:TAKE_AWAY]) {
-        [self takeAwayConfirmation];
+    if ([self.navigationItem.title isEqualToString:HOME_DELIVERY]) {
+        [self sendEmailConfirmationWithTitle:@"Home delivery" message:@"Hello, \nYou have ordered a home delivery in "];
+    }
+    else if ([self.navigationItem.title isEqualToString:TAKE_AWAY]) {
+        [self sendEmailConfirmationWithTitle:@"Take-away order" message:@"Hello, \nYou have ordered a take-away in "];
     }
     else if ([self.navigationItem.title isEqualToString:DINE_IN]) {
-        [self dineInConfirmation];
+        [self sendEmailConfirmationWithTitle:@"Dine-in order" message:@"Hello, \nYou have reserved a table for dine-in in "];
     }
 }
 
--(void)takeAwayConfirmation {
+-(void)sendEmailConfirmationWithTitle:(NSString *)title message:(NSString *)message {
     BOOL readyToSend = YES;
     NSString *email = @"";
-    NSString *emailString = @"Hello, \nYou have ordered a take-away:\n";
+    NSString *emailMessage = message;
+    
+    Business *business = [emailFields valueForKey:@"Restaurant"];
+    if (business) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"%@\n(%@)\n\nOrder info:", business.storeName, business.address]];
+    }
     
     for (NSString *field in [emailFields allKeys]) {
-        // restaurant
-        if ([field isEqualToString:@"Restaurant"]) {
-            Business *business = [emailFields valueForKey:field];
-            if (business) {
-                emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"%@\n(%@)\n", business.storeName, business.address]];
-            }
-        }
-        // full name, email, phone number
-        else if (![field isEqualToString:ORDER_NOTES]) {
+        // full name, table, email, phone number, city, address
+        if (![field isEqualToString:ORDER_NOTES] && ![field isEqualToString:@"Restaurant"]) {
             NSString *value = [emailFields valueForKey:field];
             if (![value isEqualToString:@""]) {
-                if ([field isEqualToString:@"Email"]) {
-                    if ([value length] < 5) {
-                        [AlertViewController showErrorAlert:[Fault fault:@"Email field should be at least 5 characters"] target:self handler:nil];
-                        readyToSend = NO;
-                        break;
-                    }
-                    else {
-                        email = value;
-                    }
-                }
-                if ([field isEqualToString:@"Phone number"]) {
-                    if ([value length] < 9 || [value length] > 12) {
-                        [AlertViewController showErrorAlert:[Fault fault:@"Phone number should have from 9 to 12 digits"] target:self handler:nil];
+                if ([field isEqualToString:@"Full name"]) {
+                    if ([value length] == 0) {
+                        [AlertViewController showErrorAlert:[Fault fault:@"Full name is required"] target:self handler:nil];
                         readyToSend = NO;
                         break;
                     }
                 }
-                emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", field, value]];
-            }
-            else {
-                [AlertViewController showErrorAlert:[Fault fault:@"Full name, Phone number and Email are required"] target:self handler:nil];
-                readyToSend = NO;
-            }
-        }
-    }
-    // shopping cart items
-    emailString = [emailString stringByAppendingString:@"\n\nYou've ordered:"];
-    NSArray *shoppingCartItems = shoppingCart.shoppingCartItems;
-    for (ShoppingCartItem *shoppingCartItem in shoppingCartItems) {
-        emailString = [emailString stringByAppendingString:
-                       [NSString stringWithFormat:@"\n%@: $%@ x %@ = $%@",
-                        shoppingCartItem.menuItem.title, shoppingCartItem.price, shoppingCartItem.quantity, [NSNumber numberWithDouble:([shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue])]]];
-    }
-    emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"\n--------------------\nTotal: $%@", shoppingCart.totalPrice]];
-    
-    if (readyToSend) {
-        [backendless.messaging sendTextEmail:@"Take-away order" body:emailString to:@[email] response:^(id response) {
-            [AlertViewController showAlertWithTitle:@"Take-away order complete" message:@"Order has been send to your email address" target:self handler:^(UIAlertAction *action) {
-                [self performSegueWithIdentifier:@"unwindToHomeVC" sender:nil];
-                [shoppingCart clearCart];
-            }];
-        } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
-        }];
-    }
-}
-
--(void)dineInConfirmation {
-    BOOL readyToSend = YES;
-    NSString *email = @"";
-    NSString *emailString = @"Hello, \nYou have reserved a table for Dine-in:\n";
-    
-    for (NSString *field in [emailFields allKeys]) {
-        // restaurant
-        if ([field isEqualToString:@"Restaurant"]) {
-            Business *business = [emailFields valueForKey:field];
-            if (business) {
-                emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"%@\n(%@)\n", business.storeName, business.address]];
-            }
-        }
-        // table, email, phone number
-        else if (![field isEqualToString:ORDER_NOTES]) {
-            NSString *value = [emailFields valueForKey:field];
-            if (![value isEqualToString:@""]) {
                 if ([field isEqualToString:@"Table"]) {
                     if ([value length] < 3) {
                         [AlertViewController showErrorAlert:[Fault fault:@"Table field should be at least 3 characters"] target:self handler:nil];
@@ -303,36 +248,75 @@
                         break;
                     }
                 }
-                emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", field, value]];
+                if ([field isEqualToString:@"City"]) {
+                    if ([value length] == 0) {
+                        [AlertViewController showErrorAlert:[Fault fault:@"City is requred"] target:self handler:nil];
+                        readyToSend = NO;
+                        break;
+                    }
+                }
+                if ([field isEqualToString:@"Address"]) {
+                    if ([value length] == 0) {
+                        [AlertViewController showErrorAlert:[Fault fault:@"Address is requred"] target:self handler:nil];
+                        readyToSend = NO;
+                        break;
+                    }
+                }
             }
             else {
-                [AlertViewController showErrorAlert:[Fault fault:@"Table, Phone number and Email are required"] target:self handler:nil];
-                readyToSend = NO;
-                break;
-            }
-        }
-        // order notes
-        else {
-            NSString *value = [emailFields valueForKey:field];
-            if (![value isEqualToString:@""]) {
-                emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", field, value]];
+                if ([emailFields valueForKey:@"City"] && [emailFields valueForKey:@"Address"]) {
+                    [AlertViewController showErrorAlert:[Fault fault:@"Full name, Phone number, Email, City and Address are required"] target:self handler:nil];
+                    readyToSend = NO;
+                    break;
+                }
+                else if ([emailFields valueForKey:@"Table"]) {
+                    [AlertViewController showErrorAlert:[Fault fault:@"Table, Phone number and Email are required"] target:self handler:nil];
+                    readyToSend = NO;
+                    break;
+                }
+                else if ([emailFields valueForKey:@"Full name"]) {
+                    [AlertViewController showErrorAlert:[Fault fault:@"Full name, Phone number and Email are required"] target:self handler:nil];
+                    readyToSend = NO;
+                    break;
+                }
             }
         }
     }
+    
+    if ([emailFields valueForKey:@"Full name"]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", @"Full name", [emailFields valueForKey:@"Full name"]]];
+    }
+    if ([emailFields valueForKey:@"Phone number"]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", @"Phone number", [emailFields valueForKey:@"Phone number"]]];
+    }
+    if ([emailFields valueForKey:@"City"]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", @"City", [emailFields valueForKey:@"City"]]];
+    }
+    if ([emailFields valueForKey:@"Address"]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", @"Address", [emailFields valueForKey:@"Address"]]];
+    }
+    if ([emailFields valueForKey:@"Table"]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", @"Table", [emailFields valueForKey:@"Table"]]];
+    }
+    if ([emailFields valueForKey:ORDER_NOTES] &&
+        ![[emailFields valueForKey:ORDER_NOTES] isEqualToString:@""]) {
+        emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@", ORDER_NOTES, [emailFields valueForKey:ORDER_NOTES]]];
+    }
+    
     // shopping cart items
-    emailString = [emailString stringByAppendingString:@"\n\nYou've ordered:"];
+    emailMessage = [emailMessage stringByAppendingString:@"\n\nYou've ordered:"];
     NSArray *shoppingCartItems = shoppingCart.shoppingCartItems;
     for (ShoppingCartItem *shoppingCartItem in shoppingCartItems) {
-        emailString = [emailString stringByAppendingString:
+        emailMessage = [emailMessage stringByAppendingString:
                        [NSString stringWithFormat:@"\n%@: $%@ x %@ = $%@",
                         shoppingCartItem.menuItem.title, shoppingCartItem.price, shoppingCartItem.quantity, [NSNumber numberWithDouble:([shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue])]]];
         
     }
-    emailString = [emailString stringByAppendingString:[NSString stringWithFormat:@"\n--------------------\nTotal: $%@", shoppingCart.totalPrice]];
+    emailMessage = [emailMessage stringByAppendingString:[NSString stringWithFormat:@"\n--------------------\nTotal: $%@", shoppingCart.totalPrice]];
     
     if (readyToSend) {
-        [backendless.messaging sendTextEmail:@"Dine-in order" body:emailString to:@[email] response:^(id response) {
-            [AlertViewController showAlertWithTitle:@"Dine-in order complete" message:@"Order has been send to your email address" target:self handler:^(UIAlertAction *action) {
+        [backendless.messaging sendTextEmail:title body:emailMessage to:@[email] response:^(id response) {
+            [AlertViewController showAlertWithTitle:@"Order complete" message:@"Order has been send to your email address" target:self handler:^(UIAlertAction *action) {
                 [self performSegueWithIdentifier:@"unwindToHomeVC" sender:nil];
                 [shoppingCart clearCart];
             }];

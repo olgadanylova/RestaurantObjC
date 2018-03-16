@@ -550,7 +550,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ztB-JD-pbu">
-                                            <rect key="frame" x="8" y="16" width="398" height="17.666666666666671"/>
+                                            <rect key="frame" x="32" y="16" width="374" height="17.666666666666671"/>
                                             <color key="tintColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -558,9 +558,9 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ztB-JD-pbu" firstAttribute="leading" secondItem="ct7-Lr-SyK" secondAttribute="leading" constant="8" id="apk-C2-gcJ"/>
+                                        <constraint firstItem="ztB-JD-pbu" firstAttribute="left" secondItem="ct7-Lr-SyK" secondAttribute="left" constant="32" id="apk-C2-gcJ"/>
                                         <constraint firstItem="ztB-JD-pbu" firstAttribute="top" secondItem="ct7-Lr-SyK" secondAttribute="top" constant="16" id="bh3-WM-wA0"/>
-                                        <constraint firstAttribute="trailing" secondItem="ztB-JD-pbu" secondAttribute="trailing" constant="8" id="oXK-O9-z1K"/>
+                                        <constraint firstAttribute="right" secondItem="ztB-JD-pbu" secondAttribute="right" constant="8" id="oXK-O9-z1K"/>
                                         <constraint firstAttribute="bottom" secondItem="ztB-JD-pbu" secondAttribute="bottom" constant="16" id="p7M-zl-WRD"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -576,17 +576,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" text="Order notes" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XZl-Oz-CWa">
-                                            <rect key="frame" x="8" y="11" width="398" height="22"/>
+                                            <rect key="frame" x="32" y="11" width="374" height="22"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="XZl-Oz-CWa" firstAttribute="top" secondItem="daD-44-ZTm" secondAttribute="top" constant="11" id="C1a-g5-Psr"/>
-                                        <constraint firstAttribute="trailing" secondItem="XZl-Oz-CWa" secondAttribute="trailing" constant="8" id="HtA-2N-yGW"/>
-                                        <constraint firstItem="XZl-Oz-CWa" firstAttribute="leading" secondItem="daD-44-ZTm" secondAttribute="leading" constant="8" id="J2g-nn-LZb"/>
+                                        <constraint firstAttribute="right" secondItem="XZl-Oz-CWa" secondAttribute="right" constant="8" id="HtA-2N-yGW"/>
+                                        <constraint firstItem="XZl-Oz-CWa" firstAttribute="left" secondItem="daD-44-ZTm" secondAttribute="left" constant="32" id="J2g-nn-LZb"/>
                                         <constraint firstAttribute="bottom" secondItem="XZl-Oz-CWa" secondAttribute="bottom" constant="10.666666666666664" id="mcM-zj-uyR"/>
                                     </constraints>
                                 </tableViewCellContentView>

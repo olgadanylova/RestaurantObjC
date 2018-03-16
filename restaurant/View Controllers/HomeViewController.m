@@ -157,9 +157,11 @@
                 aboutUsVC.business = business;
                 aboutUsVC.openHours = [self convertOpenHoursArrayToDictionary:openHours];
                 [aboutUsVC.tableView reloadData];
-            } error:^(Fault *f) {
+            } error:^(Fault *fault) {
+                [AlertViewController showErrorAlert:fault target:self handler:nil];
             }];
-        } error:^(Fault *f) {
+        } error:^(Fault *fault) {
+            [AlertViewController showErrorAlert:fault target:self handler:nil];
         }];
     }
 }

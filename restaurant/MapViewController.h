@@ -6,6 +6,6 @@
 @interface MapViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) Business *restaurant;
+@property (strong, nonatomic) Business *business;
 
 @end

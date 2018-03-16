@@ -17,8 +17,7 @@
     NSArray *menuItemOptions;
     NSArray *menuItemExtras;
     NSArray *menuItemPrices;
-    NSIndexPath *cuttentPriceIndexPath;
-    
+    NSIndexPath *cuttentPriceIndexPath;    
     Article *article;
 }
 @end

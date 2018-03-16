@@ -2,6 +2,7 @@
 #import "ShoppingCartCell.h"
 #import "Picture.h"
 #import "UserDefaultsHelper.h"
+#import "ShoppingCart.h"
 
 @implementation ShoppingCartCell
 
@@ -29,6 +30,7 @@
     NSIndexPath *indexPath = [(UITableView *)self.superview indexPathForRowAtPoint:buttonPosition];
     [userDefaultsHelper saveShoppingCartItem:self.shoppingCartItem atIndex:indexPath.row];
     self.quantityTextField.text = [NSString stringWithFormat:@"%@", self.shoppingCartItem.quantity];
+    shoppingCart.totalPrice = @0;
     [((UITableView *)self.superview) reloadData];
 }
 

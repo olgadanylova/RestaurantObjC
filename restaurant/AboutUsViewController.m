@@ -167,7 +167,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MapViewController *mapVC = [segue destinationViewController];
-    mapVC.restaurant = self.business;
+    mapVC.business = self.business;
 }
 
 @end

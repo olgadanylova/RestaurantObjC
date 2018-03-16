@@ -12,27 +12,16 @@
     [super viewDidLoad];
     [backendless setHostUrl:SERVER_URL];
     [backendless initApp:APPLICATION_ID APIKey:API_KEY];
-    
     [self.view bringSubviewToFront:self.enterTheAppButton];
-    [self.view bringSubviewToFront:self.loginWithFacebookButton];
-    
-    self.loginWithFacebookButton.layer.cornerRadius = 20;
-    self.loginWithFacebookButton.layer.masksToBounds = YES;
     self.enterTheAppButton.layer.cornerRadius = 20;
     self.enterTheAppButton.layer.masksToBounds = YES;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(IBAction)unwindToLoginVC:(UIStoryboardSegue *)segue {
 }
 
 - (IBAction)pressedEnterTheApp:(id)sender {
     [self performSegueWithIdentifier:@"ShowRestaurant" sender:sender];
-}
-
-- (IBAction)pressedLoginWithFacebook:(id)sender {
-}
-
--(IBAction)unwindToLoginVC:(UIStoryboardSegue *)segue {
 }
 
 @end

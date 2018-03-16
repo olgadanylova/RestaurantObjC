@@ -1,5 +1,6 @@
 
 #import "UserDefaultsHelper.h"
+#import "ShoppingCart.h"
 
 #define FAVORITES_KEY @"restaurantFavorites"
 #define SHOPPING_CART_KEY @"restaurantShoppingCart"
@@ -63,7 +64,7 @@
         }
     }
     shoppingCartItem.price = [NSNumber numberWithDouble:([price doubleValue] + [extraPrice doubleValue])];
-    
+    shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCart.totalPrice doubleValue] + [shoppingCartItem.price doubleValue])];
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
     NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
     if (!shoppingCartItems) {
@@ -173,7 +174,15 @@
         }
     }
     [shoppingCartItems removeObjectsInArray:itemsToDelete];
-    
+    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)removeAllItemsFromShoppingCart {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    [shoppingCartItems removeAllObjects];
     data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -253,14 +262,12 @@
 }
 
 -(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem atIndex:(NSInteger)index {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
-    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    NSMutableArray *shoppingCartItems = [self getShoppingCartItems];
     
     // ищем в shoppingCartItems нужный объект (по индексу)
     ShoppingCartItem *cartItem = [shoppingCartItems objectAtIndex:index];
     cartItem.quantity = shoppingCartItem.quantity;
-    
-    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

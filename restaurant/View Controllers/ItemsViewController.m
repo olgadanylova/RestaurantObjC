@@ -1,7 +1,7 @@
 
 #import "ItemsViewController.h"
-#import "ItemDetailsViewController.h"
 #import "AlertViewController.h"
+#import "ItemDetailsViewController.h"
 #import "ItemCell.h"
 #import "UserDefaultsHelper.h"
 #import "ColorHelper.h"
@@ -24,12 +24,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
-    
     if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
         items = [userDefaultsHelper getFavoriteMenuItems];
         [self.tableView reloadData];
     }
-    
     else if ([self.navigationItem.title isEqualToString:@"News"]) {
         [[backendless.data of:[Article class]] find:^(NSArray *articles) {
             items = articles;
@@ -39,7 +37,6 @@
         }];
         [self.tableView reloadData];
     }
-    
     else {
         DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
         [queryBuilder setWhereClause:[NSString stringWithFormat:@"category.title='%@'", self.navigationItem.title]];
