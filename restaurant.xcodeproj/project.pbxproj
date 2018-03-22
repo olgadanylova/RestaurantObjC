@@ -32,6 +32,7 @@
 		5AAAC5362063B194001A486B /* DeliveryMethodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAC52F2063B194001A486B /* DeliveryMethodsViewController.m */; };
 		5AAAC5372063B194001A486B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAC5312063B194001A486B /* MapViewController.m */; };
 		5AAAC5382063B194001A486B /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAC5322063B194001A486B /* DeliveryViewController.m */; };
+		5AAAC53C2063B6DC001A486B /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAC53B2063B6DB001A486B /* ShoppingCartViewController.m */; };
 		5ABE8A87204592D000211CF5 /* Price.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A71204592CE00211CF5 /* Price.m */; };
 		5ABE8A88204592D000211CF5 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A72204592CE00211CF5 /* Article.m */; };
 		5ABE8A89204592D000211CF5 /* OpenHoursInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A74204592CE00211CF5 /* OpenHoursInfo.m */; };
@@ -100,6 +101,7 @@
 		5AAAC5322063B194001A486B /* DeliveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryViewController.m; path = "View Controllers/DeliveryViewController.m"; sourceTree = "<group>"; };
 		5AAAC5332063B194001A486B /* DeliveryMethodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryMethodsViewController.h; path = "View Controllers/DeliveryMethodsViewController.h"; sourceTree = "<group>"; };
 		5AAAC5342063B194001A486B /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutUsViewController.h; path = "View Controllers/AboutUsViewController.h"; sourceTree = "<group>"; };
+		5AAAC53B2063B6DB001A486B /* ShoppingCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCartViewController.m; path = "View Controllers/ShoppingCartViewController.m"; sourceTree = "<group>"; };
 		5ABE8A71204592CE00211CF5 /* Price.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Price.m; path = Data/Price.m; sourceTree = "<group>"; };
 		5ABE8A72204592CE00211CF5 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = Data/Article.m; sourceTree = "<group>"; };
 		5ABE8A73204592CE00211CF5 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = Data/Tag.h; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				5AAAC52D2063B194001A486B /* MapViewController.h */,
 				5AAAC5312063B194001A486B /* MapViewController.m */,
 				5AAAC52E2063B194001A486B /* ShoppingCartViewController.h */,
+				5AAAC53B2063B6DB001A486B /* ShoppingCartViewController.m */,
 				5AAAC52A2063B180001A486B /* ItemDetailsViewController.h */,
 				5AAAC5292063B180001A486B /* ItemDetailsViewController.m */,
 				5AAAC5262063B128001A486B /* AlertViewController.h */,
@@ -910,6 +913,7 @@
 				5AAAC5132063B0EA001A486B /* TextViewCell.m in Sources */,
 				5AAAC5352063B194001A486B /* AboutUsViewController.m in Sources */,
 				5AAAC5192063B101001A486B /* MapPin.m in Sources */,
+				5AAAC53C2063B6DC001A486B /* ShoppingCartViewController.m in Sources */,
 				5AAAC5282063B129001A486B /* AlertViewController.m in Sources */,
 				5AAAC50D2063B0EA001A486B /* RestaurantInfoCell.m in Sources */,
 				5ABE8A8F204592D000211CF5 /* Category.m in Sources */,
