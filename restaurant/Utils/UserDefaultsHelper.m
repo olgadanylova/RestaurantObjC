@@ -137,7 +137,6 @@
                 prevent = NO;
                 return prevent;
             }
-            
             else {
                 
                 // проверяем нестандартные опции на совпадение
@@ -174,15 +173,6 @@
         }
     }
     [shoppingCartItems removeObjectsInArray:itemsToDelete];
-    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(void)removeAllItemsFromShoppingCart {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
-    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    [shoppingCartItems removeAllObjects];
     data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -250,6 +240,15 @@
         }
     }
     return prevent;
+}
+
+-(void)removeAllItemsFromShoppingCart {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
+    NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+    [shoppingCartItems removeAllObjects];
+    data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:SHOPPING_CART_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSMutableArray *)getShoppingCartItems {

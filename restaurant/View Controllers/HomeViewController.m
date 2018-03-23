@@ -31,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    [[backendless.data of:[Category class]] find:^(NSArray *categotyArray) {
+    [[backendless.data of:[Category class]] find:^(NSArray *categoryArray) {
         categories = [NSMutableArray new];
-        for (Category *category in categotyArray) {
+        for (Category *category in categoryArray) {
             [categories addObject: [NSString stringWithFormat:@"• %@", category.title]];
         }
         [self.tableView reloadData];
@@ -172,7 +172,7 @@
         NSNumber *day = openHoursInfo.day;
         NSDate *openAt = openHoursInfo.openAt;
         NSDate *closeAt = openHoursInfo.closeAt;
-        if (![openHoursDictionary objectForKey:day]) {
+        if (![openHoursDictionary objectForKey:[self stringFromWeekday:[day integerValue]]]) {
             NSString *openClose = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
             [openHoursDictionary setObject:openClose forKey:[self stringFromWeekday:[day integerValue]]];
         }

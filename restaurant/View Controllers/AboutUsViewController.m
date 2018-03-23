@@ -48,7 +48,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 2) {
-        return @"Open Hours";
+        return @"Open hours";
     }
     else if (section == 3) {
         return @"Get in touch";

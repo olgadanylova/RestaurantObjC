@@ -49,9 +49,11 @@
 		5ABE8A9C204592DC00211CF5 /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A95204592DB00211CF5 /* SplitViewController.m */; };
 		5ABE8A9D204592DC00211CF5 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE8A98204592DC00211CF5 /* ItemsViewController.m */; };
 		5AE1CD68205BF54B0008B240 /* backendless.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE1CC6E205BF54A0008B240 /* backendless.a */; };
+		FA7ECBB3B7142FF993D1BE07 /* Pods_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB5518207FBE420CB4B0A2B /* Pods_restaurant.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DB5518207FBE420CB4B0A2B /* Pods_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7A632C1E769BB6007B6B07 /* restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = restaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7A63301E769BB6007B6B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F7A63321E769BB6007B6B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		0F7A633B1E769BB6007B6B07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F7A633E1E769BB6007B6B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F7A63401E769BB6007B6B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45E9DDDBAB85A59BA9756D03 /* Pods-restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.release.xcconfig"; sourceTree = "<group>"; };
 		5AAAC4FC2063B0E9001A486B /* ItemInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfoCell.h; path = Cell/ItemInfoCell.h; sourceTree = "<group>"; };
 		5AAAC4FD2063B0E9001A486B /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextFieldCell.m; path = Cell/TextFieldCell.m; sourceTree = "<group>"; };
 		5AAAC4FE2063B0E9001A486B /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFieldCell.h; path = Cell/TextFieldCell.h; sourceTree = "<group>"; };
@@ -381,6 +384,7 @@
 		5AE1CD65205BF54B0008B240 /* CommandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandMessage.h; sourceTree = "<group>"; };
 		5AE1CD66205BF54B0008B240 /* MemoryTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryTicker.h; sourceTree = "<group>"; };
 		5AE1CD67205BF54B0008B240 /* ConcreteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteObject.h; sourceTree = "<group>"; };
+		C93A6DBD07A728428592FAE8 /* Pods-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-restaurant/Pods-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AE1CD68205BF54B0008B240 /* backendless.a in Frameworks */,
+				FA7ECBB3B7142FF993D1BE07 /* Pods_restaurant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +406,8 @@
 				5AE1CC6C205BF54A0008B240 /* lib */,
 				0F7A632E1E769BB6007B6B07 /* restaurant */,
 				0F7A632D1E769BB6007B6B07 /* Products */,
+				F67468814DF2AFF70FF5696D /* Pods */,
+				FC8AFBDF93144AC4447F7A7A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -834,6 +841,23 @@
 			name = ShoppingCart;
 			sourceTree = "<group>";
 		};
+		F67468814DF2AFF70FF5696D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C93A6DBD07A728428592FAE8 /* Pods-restaurant.debug.xcconfig */,
+				45E9DDDBAB85A59BA9756D03 /* Pods-restaurant.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC8AFBDF93144AC4447F7A7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DB5518207FBE420CB4B0A2B /* Pods_restaurant.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -841,9 +865,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F7A63431E769BB6007B6B07 /* Build configuration list for PBXNativeTarget "restaurant" */;
 			buildPhases = (
+				F1A81385743F63DD4D667969 /* [CP] Check Pods Manifest.lock */,
 				0F7A63281E769BB6007B6B07 /* Sources */,
 				0F7A63291E769BB6007B6B07 /* Frameworks */,
 				0F7A632A1E769BB6007B6B07 /* Resources */,
+				FCDAAAC6274ADD7C3C74E6C3 /* [CP] Embed Pods Frameworks */,
+				157CDB5FBF05191E4EB6C951 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -899,6 +926,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		157CDB5FBF05191E4EB6C951 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1A81385743F63DD4D667969 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-restaurant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCDAAAC6274ADD7C3C74E6C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-restaurant/Pods-restaurant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0F7A63281E769BB6007B6B07 /* Sources */ = {
@@ -1070,6 +1153,7 @@
 		};
 		0F7A63441E769BB6007B6B07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C93A6DBD07A728428592FAE8 /* Pods-restaurant.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1089,6 +1173,7 @@
 		};
 		0F7A63451E769BB6007B6B07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45E9DDDBAB85A59BA9756D03 /* Pods-restaurant.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
