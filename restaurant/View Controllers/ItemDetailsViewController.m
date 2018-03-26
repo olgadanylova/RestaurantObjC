@@ -144,10 +144,10 @@
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
         if ([self.item isKindOfClass:[MenuItem class]]) {
             Picture *picture = menuItem.pictures.firstObject;
-            [pictureHelper setImagefFromUrl:picture.url forCell:cell];
+            [pictureHelper setImageFromUrl:picture.url forCell:cell];
         }
         else if ([self.item isKindOfClass:[Article class]]) {
-            [pictureHelper setImagefFromUrl:article.picture.url forCell:cell];
+            [pictureHelper setImageFromUrl:article.picture.url forCell:cell];
         }
         return cell;
     }

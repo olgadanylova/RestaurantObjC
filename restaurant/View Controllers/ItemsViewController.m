@@ -65,13 +65,13 @@
         cell.titleLabel.text = menuItem.title;
         cell.descriptionLabel.text = menuItem.body;
         Picture *picture = menuItem.pictures.firstObject;
-        [pictureHelper setSmallImagefFromUrl:picture.url forCell:cell];
+        [pictureHelper setSmallImageFromUrl:picture.url forCell:cell];
     }
     else if ([items.firstObject isKindOfClass:[Article class]]) {
         Article *article = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = article.title;
         cell.descriptionLabel.text = article.body;
-        [pictureHelper setSmallImagefFromUrl:article.picture.url forCell:cell];
+        [pictureHelper setSmallImageFromUrl:article.picture.url forCell:cell];
     }    
     return cell;
 }

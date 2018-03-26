@@ -52,7 +52,7 @@
     cell.descriptionLabel.text = shoppingCartItem.menuItem.body;
     
     Picture *picture = shoppingCartItem.menuItem.pictures.firstObject;
-    [pictureHelper setSmallImagefFromUrl:picture.url forCell:cell];
+    [pictureHelper setSmallImageFromUrl:picture.url forCell:cell];
     
     Price *price = shoppingCartItem.menuItem.prices.firstObject;
     cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%@ x %@ %@", price.currency, price.value, shoppingCartItem.quantity, price.name];

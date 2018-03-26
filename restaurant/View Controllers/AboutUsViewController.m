@@ -90,7 +90,7 @@
         uint32_t randomIndex = arc4random_uniform((uint32_t)[self.business.welcomeImages count]);
         Picture *picture = [self.business.welcomeImages objectAtIndex:randomIndex];
         if (picture.url) {
-            [pictureHelper setImagefFromUrl:picture.url forCell:cell];
+            [pictureHelper setImageFromUrl:picture.url forCell:cell];
         }
         return cell;
     }
