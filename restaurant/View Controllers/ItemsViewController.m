@@ -5,6 +5,7 @@
 #import "ItemCell.h"
 #import "UserDefaultsHelper.h"
 #import "ColorHelper.h"
+#import "PictureHelper.h"
 #import "Backendless.h"
 #import "MenuItem.h"
 #import "Article.h"
@@ -64,35 +65,13 @@
         cell.titleLabel.text = menuItem.title;
         cell.descriptionLabel.text = menuItem.body;
         Picture *picture = menuItem.pictures.firstObject;
-        if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
-            cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:picture.url];
-        }
-        else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-                [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.pictureView.image = image;
-                });
-            });
-        }
+        [pictureHelper setSmallImagefFromUrl:picture.url forCell:cell];
     }
     else if ([items.firstObject isKindOfClass:[Article class]]) {
         Article *article = [items objectAtIndex:indexPath.row];
         cell.titleLabel.text = article.title;
         cell.descriptionLabel.text = article.body;
-        if ([userDefaultsHelper getImageFromUserDefaults:article.picture.url]) {
-            cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:article.picture.url];
-        }
-        else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
-                [userDefaultsHelper saveImageToUserDefaults:image withKey:article.picture.url];
-                dispatch_async(dispatch_get_main_queue(), ^{                    
-                    cell.pictureView.image = image;
-                });
-            });
-        }
+        [pictureHelper setSmallImagefFromUrl:article.picture.url forCell:cell];
     }    
     return cell;
 }

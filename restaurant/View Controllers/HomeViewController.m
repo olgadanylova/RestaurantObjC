@@ -167,19 +167,21 @@
 }
 
 -(NSDictionary *)convertOpenHoursArrayToDictionary:(NSArray *)openHoursArray {
-    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];    
+    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];
     for (OpenHoursInfo *openHoursInfo in openHoursArray) {
         NSNumber *day = openHoursInfo.day;
         NSDate *openAt = openHoursInfo.openAt;
         NSDate *closeAt = openHoursInfo.closeAt;
-        if (![openHoursDictionary objectForKey:[self stringFromWeekday:[day integerValue]]]) {
+        NSString *dayName = [self stringFromWeekday:[day integerValue]];
+        
+        if (![openHoursDictionary objectForKey: dayName]) {
             NSString *openClose = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
-            [openHoursDictionary setObject:openClose forKey:[self stringFromWeekday:[day integerValue]]];
+            [openHoursDictionary setObject:openClose forKey:dayName];
         }
         else {
-            NSString *openClose = [openHoursDictionary objectForKey:[self stringFromWeekday:[day integerValue]]];
+            NSString *openClose = [openHoursDictionary objectForKey:dayName];
             openClose = [openClose stringByAppendingString:[NSString stringWithFormat:@" / %@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]]];
-            [openHoursDictionary setObject:openClose forKey:day];
+            [openHoursDictionary setObject:openClose forKey:dayName];
         }
     }
     return openHoursDictionary;

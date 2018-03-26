@@ -6,6 +6,7 @@
 #import "SizeAndPriceCell.h"
 #import "UserDefaultsHelper.h"
 #import "ColorHelper.h"
+#import "PictureHelper.h"
 #import "Article.h"
 #import "MenuItem.h"
 
@@ -143,36 +144,10 @@
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
         if ([self.item isKindOfClass:[MenuItem class]]) {
             Picture *picture = menuItem.pictures.firstObject;
-            if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
-                cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:picture.url]];
-                cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-            }
-            else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-                    [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                        cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-                    });
-                });
-            }
+            [pictureHelper setImagefFromUrl:picture.url forCell:cell];
         }
         else if ([self.item isKindOfClass:[Article class]]) {
-            if ([userDefaultsHelper getImageFromUserDefaults:article.picture.url]) {
-                cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:article.picture.url]];
-                cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-            }
-            else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:article.picture.url]]];
-                    [userDefaultsHelper saveImageToUserDefaults:image withKey:article.picture.url];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                        cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-                    });
-                });
-            }
+            [pictureHelper setImagefFromUrl:article.picture.url forCell:cell];
         }
         return cell;
     }

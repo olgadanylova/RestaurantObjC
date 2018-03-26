@@ -3,6 +3,7 @@
 #import "DeliveryMethodsViewController.h"
 #import "ShoppingCartCell.h"
 #import "UserDefaultsHelper.h"
+#import "PictureHelper.h"
 #import "ShoppingCart.h"
 
 @implementation ShoppingCartViewController
@@ -51,18 +52,7 @@
     cell.descriptionLabel.text = shoppingCartItem.menuItem.body;
     
     Picture *picture = shoppingCartItem.menuItem.pictures.firstObject;
-    if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
-        cell.pictureView.image = [userDefaultsHelper getImageFromUserDefaults:picture.url];
-    }
-    else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-            [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.pictureView.image = image;
-            });
-        });
-    }    
+    [pictureHelper setSmallImagefFromUrl:picture.url forCell:cell];
     
     Price *price = shoppingCartItem.menuItem.prices.firstObject;
     cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%@ x %@ %@", price.currency, price.value, shoppingCartItem.quantity, price.name];

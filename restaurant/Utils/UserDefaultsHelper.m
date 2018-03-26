@@ -90,32 +90,24 @@
 
 -(BOOL)preventFromAdd:(MenuItem *)menuItem shoppingCartItem:(ShoppingCartItem *)shoppingCartItem {
     BOOL prevent = YES;
-    
-    // если цены не совпадают - добавляем в корзину
-    
+    // if prices are not equal - add to cart
     NSNumber *menuItemBasicPrice = ((Price *)menuItem.prices.firstObject).value;
     NSNumber *shoppingCartItemBasicPrice = ((Price *)shoppingCartItem.menuItem.prices.firstObject).value;
-    
     if (![menuItemBasicPrice isEqual:shoppingCartItemBasicPrice]) {
         prevent = NO;
         return prevent;
     }
-    
-    
     else {
-        // если цены совпадают - проверяем стандартные опции
-        
+        // if prices are equal - check standard options
         NSArray *menuItemStandardOptions = menuItem.standardOptions;
         NSArray *shoppingCartItemStandardOptions = shoppingCartItem.menuItem.standardOptions;
-        
         if (([menuItemStandardOptions count] == 0 && [shoppingCartItemStandardOptions count] > 0) ||
             ([menuItemStandardOptions count] > 0 && [shoppingCartItemStandardOptions count] == 0)) {
             prevent = NO;
             return prevent;
         }
-        
         else {
-            // проверяем стандартные опции на совпадение
+            // comparing standard options
             for (StandardOption *menuItemStandardOption in menuItemStandardOptions) {
                 NSPredicate *p1 = [NSPredicate predicateWithFormat:@"selected = %@", menuItemStandardOption.selected];
                 NSPredicate *p2 = [NSPredicate predicateWithFormat:@"name = %@", menuItemStandardOption.name];
@@ -126,20 +118,16 @@
                     return prevent;
                 }
             }
-            
-            // если стандартные опции совпадают - проверяем нестандартные опции
-            
+            // if standard options are equal - check extra options
             NSArray *menuItemExtraOptions = menuItem.extraOptions;
             NSArray *shoppingCartItemExtraOptions = shoppingCartItem.menuItem.extraOptions;
-            
             if (([menuItemExtraOptions count] == 0 && [shoppingCartItemExtraOptions count] > 0) ||
                 ([menuItemExtraOptions count] > 0 && [shoppingCartItemExtraOptions count] == 0)) {
                 prevent = NO;
                 return prevent;
             }
             else {
-                
-                // проверяем нестандартные опции на совпадение
+                // comparing extra options
                 for (ExtraOption *menuItemExtraOption in menuItemExtraOptions) {
                     NSPredicate *p1 = [NSPredicate predicateWithFormat:@"selected = %@", menuItemExtraOption.selected];
                     NSPredicate *p2 = [NSPredicate predicateWithFormat:@"name = %@", menuItemExtraOption.name];
@@ -161,10 +149,8 @@
 -(void)removeItemFromShoppingCart:(MenuItem *)menuItem {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SHOPPING_CART_KEY];
     NSMutableArray *shoppingCartItems = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    
     BOOL preventDelete = YES;
     NSMutableArray *itemsToDelete = [NSMutableArray new];
-    
     for (ShoppingCartItem *item in shoppingCartItems) {
         preventDelete = [self preventFromDelete:menuItem shoppingCartItem:item];
         if (!preventDelete) {
@@ -180,15 +166,14 @@
 
 -(BOOL)preventFromDelete:(MenuItem *)menuItem shoppingCartItem:(ShoppingCartItem *)shoppingCartItem {
     __block BOOL prevent = YES;
-    
     BOOL(^checkExtraOptions)(void) = ^{
-        // проверяем нестандартные опции
+        // check extra options
         NSArray *menuItemExtraOptions = menuItem.extraOptions;
         NSArray *shoppingCartItemExtraOptions = shoppingCartItem.menuItem.extraOptions;
         
         if ([menuItemExtraOptions count] == [shoppingCartItemExtraOptions count]) {
             if ([menuItemExtraOptions count] > 0) {
-                // проверяем нестандартные опции на совпадение
+                // compare extra options
                 for (ExtraOption *menuItemExtraOption in menuItemExtraOptions) {
                     NSPredicate *p1 = [NSPredicate predicateWithFormat:@"selected = %@", menuItemExtraOption.selected];
                     NSPredicate *p2 = [NSPredicate predicateWithFormat:@"name = %@", menuItemExtraOption.name];
@@ -210,20 +195,16 @@
         return prevent;
     };
     
-    // если цены не совпадают - сразу не катит
-    
+    // if prices are not equal - prevent = YES;
     NSNumber *menuItemBasicPrice = ((Price *)menuItem.prices.firstObject).value;
     NSNumber *shoppingCartItemBasicPrice = ((Price *)shoppingCartItem.menuItem.prices.firstObject).value;
-    
     if ([menuItemBasicPrice isEqual:shoppingCartItemBasicPrice]) {
-        // проверяем стандартные опции
-        
+        // check standard options
         NSArray *menuItemStandardOptions = menuItem.standardOptions;
         NSArray *shoppingCartItemStandardOptions = shoppingCartItem.menuItem.standardOptions;
-        
         if ([menuItemStandardOptions count] == [shoppingCartItemStandardOptions count]) {
             if ([menuItemStandardOptions count] > 0) {
-                // проверяем стандартные опции на совпадение
+                // compare standard options
                 for (StandardOption *menuItemStandardOption in menuItemStandardOptions) {
                     NSPredicate *p1 = [NSPredicate predicateWithFormat:@"selected = %@", menuItemStandardOption.selected];
                     NSPredicate *p2 = [NSPredicate predicateWithFormat:@"name = %@", menuItemStandardOption.name];
@@ -262,8 +243,6 @@
 
 -(void)saveShoppingCartItem:(ShoppingCartItem *)shoppingCartItem atIndex:(NSInteger)index {
     NSMutableArray *shoppingCartItems = [self getShoppingCartItems];
-    
-    // ищем в shoppingCartItems нужный объект (по индексу)
     ShoppingCartItem *cartItem = [shoppingCartItems objectAtIndex:index];
     cartItem.quantity = shoppingCartItem.quantity;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:shoppingCartItems];

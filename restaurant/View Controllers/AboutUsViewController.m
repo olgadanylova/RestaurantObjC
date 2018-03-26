@@ -4,6 +4,7 @@
 #import "RestaurantInfoCell.h"
 #import "UserDefaultsHelper.h"
 #import "ColorHelper.h"
+#import "PictureHelper.h"
 
 #define CALL_US @"✆ Call us"
 #define SEND_EMAIL @"✉️ Send email"
@@ -88,22 +89,8 @@
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
         uint32_t randomIndex = arc4random_uniform((uint32_t)[self.business.welcomeImages count]);
         Picture *picture = [self.business.welcomeImages objectAtIndex:randomIndex];
-        if ([userDefaultsHelper getImageFromUserDefaults:picture.url]) {
-            cell.backgroundView = [[UIImageView alloc] initWithImage:[userDefaultsHelper getImageFromUserDefaults:picture.url]];
-            cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-        }
-        else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picture.url]]];
-                if (image && picture.url) {
-                    NSLog(@"%@, %@", image, picture.url);
-                    [userDefaultsHelper saveImageToUserDefaults:image withKey:picture.url];
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.backgroundView = [[UIImageView alloc] initWithImage:image];
-                    cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-                });
-            });
+        if (picture.url) {
+            [pictureHelper setImagefFromUrl:picture.url forCell:cell];
         }
         return cell;
     }
