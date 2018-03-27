@@ -155,7 +155,7 @@
                 UINavigationController *navController = [segue destinationViewController];
                 AboutUsViewController *aboutUsVC = (AboutUsViewController *)[navController topViewController];
                 aboutUsVC.business = business;
-                aboutUsVC.openHours = [self convertOpenHoursArrayToDictionary:openHours];
+                aboutUsVC.openHours = [self sortedOpenHours:openHours];
                 [aboutUsVC.tableView reloadData];
             } error:^(Fault *fault) {
                 [AlertViewController showErrorAlert:fault target:self handler:nil];
@@ -166,37 +166,44 @@
     }
 }
 
--(NSDictionary *)convertOpenHoursArrayToDictionary:(NSArray *)openHoursArray {
-    NSMutableDictionary *openHoursDictionary = [NSMutableDictionary new];
-    for (OpenHoursInfo *openHoursInfo in openHoursArray) {
+-(NSArray *)sortedOpenHours:(NSArray *)openHours {
+    NSSortDescriptor *dayDescriptor = [[NSSortDescriptor alloc] initWithKey:@"day" ascending:YES];
+    NSSortDescriptor *openAtDescriptor = [[NSSortDescriptor alloc] initWithKey:@"openAt" ascending:YES];
+    NSArray *sortDescriptors = @[dayDescriptor, openAtDescriptor];
+    NSArray *sortedOpenHours = [openHours sortedArrayUsingDescriptors:sortDescriptors];
+    NSMutableArray *openHoursStrings = [NSMutableArray new];
+    for (int index = 0; index < 7; index++) {
+        [openHoursStrings addObject:[NSNull null]];
+    }
+    for (OpenHoursInfo *openHoursInfo in sortedOpenHours) {
         NSNumber *day = openHoursInfo.day;
         NSDate *openAt = openHoursInfo.openAt;
         NSDate *closeAt = openHoursInfo.closeAt;
-        NSString *dayName = [self stringFromWeekday:[day integerValue]];
-        
-        if (![openHoursDictionary objectForKey: dayName]) {
-            NSString *openClose = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
-            [openHoursDictionary setObject:openClose forKey:dayName];
+        NSInteger index = [day integerValue] - 1;
+        if ([[openHoursStrings objectAtIndex:index] isKindOfClass:[NSNull class]]) {
+            NSString *hours = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]];
+            [openHoursStrings replaceObjectAtIndex:index withObject:hours];
         }
         else {
-            NSString *openClose = [openHoursDictionary objectForKey:dayName];
-            openClose = [openClose stringByAppendingString:[NSString stringWithFormat:@" / %@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]]];
-            [openHoursDictionary setObject:openClose forKey:dayName];
+            NSString *hours = [openHoursStrings objectAtIndex:index];
+            hours = [hours stringByAppendingString:[NSString stringWithFormat:@" / %@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]]];
+            [openHoursStrings replaceObjectAtIndex:index withObject:hours];
         }
     }
-    return openHoursDictionary;
+    
+    for (int index = 0; index < 7; index++) {
+        if ([[openHoursStrings objectAtIndex:index] isKindOfClass:[NSNull class]]) {
+            [openHoursStrings replaceObjectAtIndex:index withObject:@"Closed"];
+        }
+    }
+    
+    return openHoursStrings;
 }
 
 -(NSString *)stringFromDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     return [dateFormatter stringFromDate:date];
-}
-
-- (NSString *)stringFromWeekday:(NSInteger)weekday {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    return dateFormatter.shortWeekdaySymbols[weekday];
 }
 
 -(IBAction)unwindToHomeVC:(UIStoryboardSegue *)segue {

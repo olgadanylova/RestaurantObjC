@@ -99,15 +99,14 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.storeNameLabel.text = self.business.storeName;
         cell.addressLabel.text = self.business.address;
-        cell.descLabel.text = self.business.desc;
         return cell;
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == 2) {    
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OpenHoursCell"];
         cell.userInteractionEnabled = NO;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = [[self.openHours allKeys] objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [self.openHours objectForKey:[[self.openHours allKeys] objectAtIndex:indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;        
+        cell.textLabel.text = [self.openHours objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [self stringFromWeekday:indexPath.row];
         return cell;
     }
     else if (indexPath.section == 3) {
@@ -150,6 +149,12 @@
         }
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) { }];
     }
+}
+
+- (NSString *)stringFromWeekday:(NSInteger)weekday {    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    return dateFormatter.weekdaySymbols[weekday];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
