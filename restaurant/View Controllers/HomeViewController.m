@@ -189,8 +189,7 @@
             hours = [hours stringByAppendingString:[NSString stringWithFormat:@" / %@ - %@", [self stringFromDate:openAt], [self stringFromDate:closeAt]]];
             [openHoursStrings replaceObjectAtIndex:index withObject:hours];
         }
-    }
-    
+    }    
     for (int index = 0; index < 7; index++) {
         if ([[openHoursStrings objectAtIndex:index] isKindOfClass:[NSNull class]]) {
             [openHoursStrings replaceObjectAtIndex:index withObject:@"Closed"];

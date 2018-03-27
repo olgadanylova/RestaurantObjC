@@ -85,13 +85,8 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"RestaurantImageCell"];
         cell.userInteractionEnabled = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"waitingImage.png"]];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aboutUs.png"]];
         cell.backgroundView.contentMode = UIViewContentModeScaleAspectFill;
-        uint32_t randomIndex = arc4random_uniform((uint32_t)[self.business.welcomeImages count]);
-        Picture *picture = [self.business.welcomeImages objectAtIndex:randomIndex];
-        if (picture.url) {
-            [pictureHelper setImageFromUrl:picture.url forCell:cell];
-        }
         return cell;
     }
     else if (indexPath.section == 1) {
