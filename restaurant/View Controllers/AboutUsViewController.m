@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView setUserInteractionEnabled:YES];
     contacts = @[CALL_US, SEND_EMAIL];
     socialNetworks = @[FACEBOOK, TWITTER, INSTAGRAM, PINTEREST];
 }
