@@ -684,44 +684,8 @@
                                     <outlet property="titleLabel" destination="qsv-AP-gcX" id="BGo-Nk-4WX"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExtraCell" rowHeight="47" id="S6g-At-Way" customClass="OptionsAndExtrasCell">
-                                <rect key="frame" x="0.0" y="156" width="414" height="47"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S6g-At-Way" id="OV0-cs-M6E">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extra" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caZ-p6-swj" userLabel="Extra Label">
-                                            <rect key="frame" x="16" y="8.0000000000000018" width="317" height="30.666666666666671"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lkd-mN-dln">
-                                            <rect key="frame" x="349" y="8" width="51" height="31"/>
-                                            <color key="onTintColor" red="0.36078431370000003" green="0.72156862749999995" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="selectedSwitchAction:" destination="S6g-At-Way" eventType="valueChanged" id="ISW-Oo-Rox"/>
-                                            </connections>
-                                        </switch>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="lkd-mN-dln" secondAttribute="bottom" constant="8" id="24l-ai-mh1"/>
-                                        <constraint firstAttribute="trailing" secondItem="lkd-mN-dln" secondAttribute="trailing" constant="16" id="2P4-Wh-uGG"/>
-                                        <constraint firstItem="lkd-mN-dln" firstAttribute="left" secondItem="caZ-p6-swj" secondAttribute="right" constant="16" id="30V-bF-ybJ"/>
-                                        <constraint firstItem="lkd-mN-dln" firstAttribute="top" secondItem="OV0-cs-M6E" secondAttribute="top" constant="8" id="Tcm-iU-OWq"/>
-                                        <constraint firstItem="caZ-p6-swj" firstAttribute="left" secondItem="OV0-cs-M6E" secondAttribute="left" constant="16" id="aCj-32-APv"/>
-                                        <constraint firstItem="caZ-p6-swj" firstAttribute="top" secondItem="OV0-cs-M6E" secondAttribute="top" constant="8" id="m1o-Ip-fWw"/>
-                                        <constraint firstAttribute="bottom" secondItem="caZ-p6-swj" secondAttribute="bottom" constant="8" id="rzu-iz-rVP"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="optionLabel" destination="caZ-p6-swj" id="tU3-2s-dGU"/>
-                                    <outlet property="selectedSwitch" destination="lkd-mN-dln" id="ALx-zb-vjT"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionCell" rowHeight="47" id="LTQ-17-Ljp" customClass="OptionsAndExtrasCell">
-                                <rect key="frame" x="0.0" y="203" width="414" height="47"/>
+                                <rect key="frame" x="0.0" y="156" width="414" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LTQ-17-Ljp" id="jz0-FX-a3o">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="46.666666666666664"/>
@@ -754,6 +718,42 @@
                                 <connections>
                                     <outlet property="optionLabel" destination="EXZ-A9-0og" id="cYR-gW-gLz"/>
                                     <outlet property="selectedSwitch" destination="aE6-RW-DhF" id="Hci-aj-N1I"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExtraCell" rowHeight="47" id="S6g-At-Way" customClass="OptionsAndExtrasCell">
+                                <rect key="frame" x="0.0" y="203" width="414" height="47"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S6g-At-Way" id="OV0-cs-M6E">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extra" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caZ-p6-swj" userLabel="Extra Label">
+                                            <rect key="frame" x="16" y="8.0000000000000018" width="317" height="30.666666666666671"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lkd-mN-dln">
+                                            <rect key="frame" x="349" y="8" width="51" height="31"/>
+                                            <color key="onTintColor" red="0.36078431370000003" green="0.72156862749999995" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="selectedSwitchAction:" destination="S6g-At-Way" eventType="valueChanged" id="ISW-Oo-Rox"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="lkd-mN-dln" secondAttribute="bottom" constant="8" id="24l-ai-mh1"/>
+                                        <constraint firstAttribute="trailing" secondItem="lkd-mN-dln" secondAttribute="trailing" constant="16" id="2P4-Wh-uGG"/>
+                                        <constraint firstItem="lkd-mN-dln" firstAttribute="left" secondItem="caZ-p6-swj" secondAttribute="right" constant="16" id="30V-bF-ybJ"/>
+                                        <constraint firstItem="lkd-mN-dln" firstAttribute="top" secondItem="OV0-cs-M6E" secondAttribute="top" constant="8" id="Tcm-iU-OWq"/>
+                                        <constraint firstItem="caZ-p6-swj" firstAttribute="left" secondItem="OV0-cs-M6E" secondAttribute="left" constant="16" id="aCj-32-APv"/>
+                                        <constraint firstItem="caZ-p6-swj" firstAttribute="top" secondItem="OV0-cs-M6E" secondAttribute="top" constant="8" id="m1o-Ip-fWw"/>
+                                        <constraint firstAttribute="bottom" secondItem="caZ-p6-swj" secondAttribute="bottom" constant="8" id="rzu-iz-rVP"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="optionLabel" destination="caZ-p6-swj" id="tU3-2s-dGU"/>
+                                    <outlet property="selectedSwitch" destination="lkd-mN-dln" id="ALx-zb-vjT"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SizeAndPriceCell" rowHeight="47" id="rYd-dt-5za" customClass="SizeAndPriceCell">
