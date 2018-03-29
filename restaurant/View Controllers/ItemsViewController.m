@@ -10,6 +10,9 @@
 #import "MenuItem.h"
 #import "Article.h"
 
+#define FAVORITES @"Favorites"
+#define NEWS @"News"
+
 @interface ItemsViewController() {
     NSArray *items;
 }
@@ -25,18 +28,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
-    if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
+    if ([self.navigationItem.title isEqualToString:FAVORITES]) {
         items = [userDefaultsHelper getFavoriteMenuItems];
         [self.tableView reloadData];
     }
-    else if ([self.navigationItem.title isEqualToString:@"News"]) {
+    else if ([self.navigationItem.title isEqualToString:NEWS]) {
         [[backendless.data of:[Article class]] find:^(NSArray *articles) {
             items = articles;
             [self.tableView reloadData];
         } error:^(Fault *fault) {
             [AlertViewController showErrorAlert:fault target:self handler:nil];
         }];
-        [self.tableView reloadData];
     }
     else {
         DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
@@ -77,7 +79,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.navigationItem.title isEqualToString:@"Favorites"]) {
+    if ([self.navigationItem.title isEqualToString:FAVORITES]) {
         return YES;
     }
     return NO;

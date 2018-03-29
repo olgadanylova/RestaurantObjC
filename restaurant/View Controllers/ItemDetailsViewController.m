@@ -18,7 +18,7 @@
     NSArray *menuItemOptions;
     NSArray *menuItemExtras;
     NSArray *menuItemPrices;
-    NSIndexPath *cuttentPriceIndexPath;    
+    NSIndexPath *currentPriceIndexPath;    
     Article *article;
 }
 @end
@@ -60,11 +60,11 @@
 }
 
 -(void)selectPriceAutomatically {
-    if (!cuttentPriceIndexPath) {
-        cuttentPriceIndexPath = [NSIndexPath indexPathForRow:0 inSection:4];
+    if (!currentPriceIndexPath) {
+        currentPriceIndexPath = [NSIndexPath indexPathForRow:0 inSection:4];
     }
-    [self.table selectRowAtIndexPath:cuttentPriceIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.table didSelectRowAtIndexPath:cuttentPriceIndexPath];
+    [self.table selectRowAtIndexPath:currentPriceIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [self tableView:self.table didSelectRowAtIndexPath:currentPriceIndexPath];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -206,7 +206,7 @@
     if (indexPath.section == 4) {
         SizeAndPriceCell *cell = [self.table cellForRowAtIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cuttentPriceIndexPath = indexPath;
+        currentPriceIndexPath = indexPath;
     }
     else {
         [self selectPriceAutomatically];
@@ -222,7 +222,7 @@
 
 - (IBAction)pressedAddToCart:(id)sender {
     @try {
-        Price *selectedPrice = [menuItem.prices objectAtIndex:cuttentPriceIndexPath.row];
+        Price *selectedPrice = [menuItem.prices objectAtIndex:currentPriceIndexPath.row];
         menuItem.prices = [NSMutableArray arrayWithObject:selectedPrice];
         [userDefaultsHelper addItemToShoppingCart:menuItem];
         menuItem.prices = ((MenuItem *)self.item).prices;
