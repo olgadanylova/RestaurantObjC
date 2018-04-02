@@ -32,9 +32,9 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
     [[backendless.data of:[Category class]] find:^(NSArray *categoryArray) {
-        categories = [NSMutableArray new];
+        self->categories = [NSMutableArray new];
         for (Category *category in categoryArray) {
-            [categories addObject: [NSString stringWithFormat:@"• %@", category.title]];
+            [self->categories addObject: [NSString stringWithFormat:@"• %@", category.title]];
         }
         [self.tableView reloadData];
     } error:^(Fault *fault) {

@@ -26,7 +26,7 @@
     }
     else if (indexPath.section == 3) {        
         NSRange range = [self.optionLabel.text rangeOfString:@":"];
-        NSString *predicateString = [self.optionLabel.text substringToIndex:range.location];
+        NSString *predicateString = [self.optionLabel.text substringToIndex:range.location];       
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", predicateString];
         ExtraOption *extraOption = [self.menuItem.extraOptions filteredArrayUsingPredicate:predicate].firstObject;
         if ([self.selectedSwitch isOn]) {

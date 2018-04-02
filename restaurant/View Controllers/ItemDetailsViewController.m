@@ -56,6 +56,7 @@
 }
 
 -(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     [self selectPriceAutomatically];
 }
 

@@ -34,7 +34,7 @@
     }
     else if ([self.navigationItem.title isEqualToString:NEWS]) {
         [[backendless.data of:[Article class]] find:^(NSArray *articles) {
-            items = articles;
+            self->items = articles;
             [self.tableView reloadData];
         } error:^(Fault *fault) {
             [AlertViewController showErrorAlert:fault target:self handler:nil];
@@ -44,7 +44,7 @@
         DataQueryBuilder *queryBuilder = [DataQueryBuilder new];
         [queryBuilder setWhereClause:[NSString stringWithFormat:@"category.title='%@'", self.navigationItem.title]];
         [[backendless.data of:[MenuItem class]] find:queryBuilder response:^(NSArray *menuItems) {
-            items = menuItems;
+            self->items = menuItems;
             [self.tableView reloadData];
         } error:^(Fault *fault) {
             [AlertViewController showErrorAlert:fault target:self handler:nil];
