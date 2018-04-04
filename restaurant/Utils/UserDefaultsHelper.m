@@ -194,7 +194,6 @@
         }
         return prevent;
     };
-    
     // if prices are not equal - prevent = YES;
     NSNumber *menuItemBasicPrice = ((Price *)menuItem.prices.firstObject).value;
     NSNumber *shoppingCartItemBasicPrice = ((Price *)shoppingCartItem.menuItem.prices.firstObject).value;

@@ -13,6 +13,10 @@
     self.tableView.tableFooterView = [UIView new];
     shoppingCart.totalPrice = @0;
     shoppingCart.shoppingCartItems = [userDefaultsHelper getShoppingCartItems];
+    [self proceedToPaymentButtonEnabled];
+}
+
+-(void)proceedToPaymentButtonEnabled {
     if ([shoppingCart.shoppingCartItems count] > 0) {
         self.proceedToPaymentButton.enabled = YES;
     }
@@ -55,7 +59,7 @@
     [pictureHelper setSmallImageFromUrl:picture.url forCell:cell];
     
     Price *price = shoppingCartItem.menuItem.prices.firstObject;
-    cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%@ x %@ %@", price.currency, price.value, shoppingCartItem.quantity, price.name];
+    cell.sizeAndQuantityLabel.text = [NSString stringWithFormat:@"%@%.2f x %@ %@", price.currency, [price.value doubleValue], shoppingCartItem.quantity, price.name];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(selected = 1)"];
     NSMutableArray *standardOptions = [NSMutableArray arrayWithArray:[shoppingCartItem.menuItem.standardOptions filteredArrayUsingPredicate:predicate]];
@@ -65,15 +69,15 @@
         optionsString = [optionsString stringByAppendingString:[NSString stringWithFormat:@"%@: $0\n", standardOption.name]];
     }
     for (ExtraOption *extraOption in extraOptions) {
-        optionsString = [optionsString stringByAppendingString:[NSString stringWithFormat:@"%@: $%@\n", extraOption.name, extraOption.value]];
+        optionsString = [optionsString stringByAppendingString:[NSString stringWithFormat:@"%@: $%.2f\n", extraOption.name, [extraOption.value doubleValue]]];
     }
     if ([optionsString length] > 0) {
         optionsString = [optionsString substringToIndex:[optionsString length] - 1];
     }
     cell.optionsLabel.text = optionsString;
-    cell.totalLabel.text = [NSString stringWithFormat:@"Total: %@%@", price.currency, [NSNumber numberWithDouble:[shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]]];
+    cell.totalLabel.text = [NSString stringWithFormat:@"Total: %@%.2f", price.currency, [shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue]];
     shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue] + [shoppingCart.totalPrice doubleValue])];    
-    self.proceedToPaymentButton.title = [NSString stringWithFormat:@"Proceed to payment: $%@", shoppingCart.totalPrice];
+    self.proceedToPaymentButton.title = [NSString stringWithFormat:@"Proceed to payment: $%.2f", [shoppingCart.totalPrice doubleValue]];
     return cell;
 }
 
@@ -84,11 +88,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ShoppingCartItem *shoppingCartItem = [shoppingCart.shoppingCartItems objectAtIndex:indexPath.row];
-        shoppingCart.totalPrice = [NSNumber numberWithDouble:([shoppingCart.totalPrice doubleValue] - [shoppingCartItem.price doubleValue] * [shoppingCartItem.quantity integerValue])];
         [userDefaultsHelper removeItemFromShoppingCart:shoppingCartItem.menuItem];
+        shoppingCart.totalPrice = @0;
         shoppingCart.shoppingCartItems = [userDefaultsHelper getShoppingCartItems];
         self.proceedToPaymentButton.title = [NSString stringWithFormat:@"Proceed to payment: $%@", shoppingCart.totalPrice];
-        [self.tableView reloadData];
+        [self proceedToPaymentButtonEnabled];
+        [self.tableView reloadData];        
     }
 }
 

@@ -189,7 +189,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.menuItem = menuItem;
         ExtraOption *extra = [menuItemExtras objectAtIndex:indexPath.row];
-        cell.optionLabel.text = [NSString stringWithFormat:@"%@: $%@", extra.name, extra.value];
+        cell.optionLabel.text = [NSString stringWithFormat:@"%@: $%.2f", extra.name, [extra.value doubleValue]];
         [cell.selectedSwitch setOn: [extra.selected boolValue]];
         return cell;
     }
@@ -197,7 +197,7 @@
         SizeAndPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SizeAndPriceCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Price *price = [menuItemPrices objectAtIndex:indexPath.row];
-        cell.sizeAndPriceLabel.text = [NSString stringWithFormat:@"%@: $%@", price.name, price.value];
+        cell.sizeAndPriceLabel.text = [NSString stringWithFormat:@"%@: $%.2f", price.name, [price.value doubleValue]];
         return cell;
     }
     return nil;
