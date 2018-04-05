@@ -197,7 +197,7 @@
         SizeAndPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SizeAndPriceCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Price *price = [menuItemPrices objectAtIndex:indexPath.row];
-        cell.sizeAndPriceLabel.text = [NSString stringWithFormat:@"%@: $%.2f", price.name, [price.value doubleValue]];
+        cell.sizeAndPriceLabel.text = [NSString stringWithFormat:@"%@: %@%.2f", price.name, price.currency, [price.value doubleValue]];
         return cell;
     }
     return nil;
