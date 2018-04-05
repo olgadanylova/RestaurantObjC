@@ -1,10 +1,13 @@
 
 #import "ShoppingCartViewController.h"
+#import "AlertViewController.h"
 #import "DeliveryMethodsViewController.h"
 #import "ShoppingCartCell.h"
 #import "UserDefaultsHelper.h"
 #import "PictureHelper.h"
 #import "ShoppingCart.h"
+#import "DeliveryMethod.h"
+#import "Backendless.h"
 
 @implementation ShoppingCartViewController
 
@@ -95,6 +98,16 @@
         [self proceedToPaymentButtonEnabled];
         [self.tableView reloadData];        
     }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [[backendless.data of:[DeliveryMethod class]] find:^(NSArray *deliveryMethods) {
+        DeliveryMethodsViewController *deliveryMethodsVC = [segue destinationViewController];  
+        deliveryMethodsVC.deliveryMethods = deliveryMethods;
+        [deliveryMethodsVC.tableView reloadData];
+    } error:^(Fault *fault) {
+        [AlertViewController showErrorAlert:fault target:self handler:nil];
+    }];
 }
 
 @end

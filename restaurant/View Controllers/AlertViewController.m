@@ -1,6 +1,7 @@
 
 #import "AlertViewController.h"
 #import "ColorHelper.h"
+#import "Backendless.h"
 
 @implementation AlertViewController
 
@@ -35,6 +36,30 @@
     UIAlertAction *goToCart = [UIAlertAction actionWithTitle:@"Go to cart" style:UIAlertActionStyleDefault handler:actionHandler2];
     [alert addAction:contitueShopping];
     [alert addAction:goToCart];
+    [target presentViewController:alert animated:YES completion:nil];
+}
+
++(void)showSendEmailAlert:(NSString *)title body:(NSString *)body target:(UIViewController *)target handler:(void(^)(void))handler {
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle: @"Send order confirmation"
+                                                                              message: @"Input your email"
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    [alert.view setTintColor:[colorHelper getColorFromHex:@"#FF9300" withAlpha:1]];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"email";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *sendConfirmation) {
+        if ([alert.textFields[0].text length] > 0) {
+            [backendless.messaging sendTextEmail:title body:body to:@[alert.textFields[0].text] response:^(MessageStatus *status) {
+                handler();
+            } error:^(Fault *fault) {
+                [self showErrorAlert:false target:target handler:nil];
+            }];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:confirmAction];
+    [alert addAction:cancelAction];
     [target presentViewController:alert animated:YES completion:nil];
 }
 
