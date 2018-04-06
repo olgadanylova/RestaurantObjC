@@ -478,7 +478,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Delivery method" id="Zqr-ue-ioL"/>
                     <connections>
-                        <segue destination="NYA-xE-u8x" kind="show" identifier="ShowDineInOrTakeAway" id="1fU-ld-ru4"/>
+                        <segue destination="NYA-xE-u8x" kind="show" identifier="ShowDeliveryMethod" id="1fU-ld-ru4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAh-7Q-43X" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -33,11 +33,11 @@
     
     singleLineInputFieldsDictionary = [NSMutableDictionary new];
     for (DeliveryInputField *inputField in singleLineInputFields) {
-        [singleLineInputFieldsDictionary setObject:[NSNull null] forKey:inputField.title];
+        [singleLineInputFieldsDictionary setObject:@"" forKey:inputField.title];
     }
     multiLineInputFieldsDictionary = [NSMutableDictionary new];
     for (DeliveryInputField *inputField in multiLineInputFields) {
-        [multiLineInputFieldsDictionary setObject:[NSNull null] forKey:inputField.title];
+        [multiLineInputFieldsDictionary setObject:@"" forKey:inputField.title];
     }
     readyToSendEmail = YES;
 }
@@ -47,23 +47,12 @@
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //    if ([singleLineInputFields count] > 0 && [multiLineInputFields count] > 0) {
-    //        return 3;
-    //    }
-    //    else if (([singleLineInputFields count] > 0 && [multiLineInputFields count] == 0) ||
-    //             ([singleLineInputFields count] == 0 && [multiLineInputFields count] > 0)) {
-    //        return 2;
-    //    }
     return 3;
 }
 
@@ -110,13 +99,13 @@
     return nil;
 }
 
+-(void)textFieldDidChange:(UITextField *)textField {
+    [singleLineInputFieldsDictionary setObject:textField.text forKey:textField.placeholder];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField becomeFirstResponder];
     return NO;
-}
-
--(void)textFieldDidChange:(UITextField *)textField {
-    [singleLineInputFieldsDictionary setObject:textField.text forKey:textField.placeholder];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -175,22 +164,21 @@
                 itemOptions = [itemOptions stringByAppendingString:[NSString stringWithFormat:@"%@, ", option.name]];
             }
         }
-        [emailText substringToIndex:[emailText length] - 2];
         for (ExtraOption *option in item.menuItem.extraOptions) {
             if ([option.selected isEqual:@1]) {
                 itemOptions = [itemOptions stringByAppendingString:[NSString stringWithFormat:@"%@, ", option.name]];
             }
         }
         itemOptions = [itemOptions substringToIndex:[itemOptions length] - 2];
-        emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@(%@) = $%.2f ", item.menuItem.title, itemOptions, [item.price doubleValue]]];
+        emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@(%@) = %@ x $%.2f", item.menuItem.title, itemOptions, item.quantity, [item.price doubleValue]]];
     }
     emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n----------\nTotal:$%.2f\n\nCustomers' info:", [shoppingCart.totalPrice doubleValue]]];
     
     for (NSString *field in [singleLineInputFieldsDictionary allKeys]) {
         NSString *value = [singleLineInputFieldsDictionary valueForKey:field];
-        if ([value isKindOfClass:[NSNull class]] || [value isEqualToString:@""]) {
+        if ([value isEqualToString:@""]) {
             Fault *fault = [Fault fault:[NSString stringWithFormat:@"Field '%@' is required", field]];
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
+            [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
             readyToSendEmail = NO;
             break;
         }
@@ -202,14 +190,14 @@
     
     for (NSString *field in [multiLineInputFieldsDictionary allKeys]) {
         NSString *value = [multiLineInputFieldsDictionary valueForKey:field];
-        if (![value isKindOfClass:[NSNull class]]) {
+        if (![value isEqualToString:@""]) {
             emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@: %@", field, [multiLineInputFieldsDictionary valueForKey:field]]];
         }
     }
     
     if (readyToSendEmail) {
-        [AlertViewController showSendEmailAlert:@"Order confirmation" body:emailText target:self handler:^{
-            [AlertViewController showAlertWithTitle:@"Order confirmation" message:@"Confirmation send" target:self handler:^(UIAlertAction *action) {
+        [AlertViewController showSendEmailAlert:@"Order confirmation" body:emailText target:self actionHandler:^{
+            [AlertViewController showAlertWithTitle:@"Order confirmation" message:@"Confirmation send" target:self actionHandler:^(UIAlertAction *action) {
                 [shoppingCart clearCart];
                 [self performSegueWithIdentifier:@"unwindToHomeVC" sender:nil];
             }];

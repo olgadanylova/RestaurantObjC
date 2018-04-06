@@ -227,9 +227,9 @@
         menuItem.prices = [NSMutableArray arrayWithObject:selectedPrice];
         [userDefaultsHelper addItemToShoppingCart:menuItem];
         menuItem.prices = ((MenuItem *)self.item).prices;
-        [AlertViewController showAddedToCartAlert:@"Shopping cart" message:@"Menu item added to cart" target:self handler1:^(UIAlertAction *continueShopping) {
+        [AlertViewController showAddedToCartAlert:@"Shopping cart" message:@"Menu item added to cart" target:self actionHandler1:^(UIAlertAction *continueShopping) {
             [self performSegueWithIdentifier:@"unwindToItemsVC" sender:nil];
-        } handler2:^(UIAlertAction *goToCart) {
+        } actionHandler2:^(UIAlertAction *goToCart) {
             self.addToCartButton.title = @"Already added to cart";
             [self.addToCartButton setEnabled:NO];
             [self.table setUserInteractionEnabled:NO];
@@ -238,7 +238,7 @@
     }
     @catch (NSException *exception) {
         Fault *fault = [Fault fault:exception.name detail:exception.reason];
-        [AlertViewController showErrorAlert:fault target:self handler:nil];
+        [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
     }    
 }
 

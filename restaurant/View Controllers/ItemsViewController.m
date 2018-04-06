@@ -37,7 +37,7 @@
             self->items = articles;
             [self.tableView reloadData];
         } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
+            [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
         }];
     }
     else {
@@ -47,7 +47,7 @@
             self->items = menuItems;
             [self.tableView reloadData];
         } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
+            [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
         }];
     }
 }

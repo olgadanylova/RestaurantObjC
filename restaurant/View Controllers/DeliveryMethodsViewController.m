@@ -31,7 +31,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"ShowDineInOrTakeAway" sender:cell];
+    [self performSegueWithIdentifier:@"ShowDeliveryMethod" sender:cell];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -45,7 +45,7 @@
         deliveryVC.business = business;
         [deliveryVC.tableView reloadData];
     } error:^(Fault *fault) {
-        [AlertViewController showErrorAlert:fault target:self handler:nil];
+        [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
     }];
 }
 

@@ -106,7 +106,7 @@
         deliveryMethodsVC.deliveryMethods = deliveryMethods;
         [deliveryMethodsVC.tableView reloadData];
     } error:^(Fault *fault) {
-        [AlertViewController showErrorAlert:fault target:self handler:nil];
+        [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
     }];
 }
 

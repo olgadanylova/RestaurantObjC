@@ -38,7 +38,7 @@
         }
         [self.tableView reloadData];
     } error:^(Fault *fault) {
-        [AlertViewController showErrorAlert:fault target:self handler:nil];
+        [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
     }];
     favoritesAndCart = @[FAVORITES, SHOPPING_CART];
     news = @[ARTICLES];
@@ -158,10 +158,10 @@
                 aboutUsVC.openHours = [self sortedOpenHours:openHours];
                 [aboutUsVC.tableView reloadData];
             } error:^(Fault *fault) {
-                [AlertViewController showErrorAlert:fault target:self handler:nil];
+                [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
             }];
         } error:^(Fault *fault) {
-            [AlertViewController showErrorAlert:fault target:self handler:nil];
+            [AlertViewController showErrorAlert:fault target:self actionHandler:nil];
         }];
     }
 }

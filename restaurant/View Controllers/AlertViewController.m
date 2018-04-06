@@ -9,7 +9,7 @@
     [super viewDidLoad];
 }
 
-+(void)showErrorAlert:(Fault *)fault target:(UIViewController *)target handler:(void (^)(UIAlertAction *))actionHandler {
++(void)showErrorAlert:(Fault *)fault target:(UIViewController *)target actionHandler:(void (^)(UIAlertAction *))actionHandler {
     NSString *errorTitle = @"Error";
     if (fault.faultCode) {
         errorTitle = [NSString stringWithFormat:@"Error %@", fault.faultCode];
@@ -21,7 +21,7 @@
     [target presentViewController:alert animated:YES completion:nil];
 }
 
-+(void)showAlertWithTitle:(NSString *)title message:(NSString *)message target:(UIViewController *)target handler:(void(^)(UIAlertAction *))actionHandler {
++(void)showAlertWithTitle:(NSString *)title message:(NSString *)message target:(UIViewController *)target actionHandler:(void(^)(UIAlertAction *))actionHandler {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert.view setTintColor:[colorHelper getColorFromHex:@"#FF9300" withAlpha:1]];
     UIAlertAction *chatsAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:actionHandler];
@@ -29,17 +29,17 @@
     [target presentViewController:alert animated:YES completion:nil];
 }
 
-+(void)showAddedToCartAlert:(NSString *)title message:(NSString *)message target:(UIViewController *)target handler1:(void(^)(UIAlertAction *))actionHandler1 handler2:(void (^)(UIAlertAction *))actionHandler2 {
++(void)showAddedToCartAlert:(NSString *)title message:(NSString *)message target:(UIViewController *)target actionHandler1:(void(^)(UIAlertAction *))actionHandler1 actionHandler2:(void (^)(UIAlertAction *))actionHandler2 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert.view setTintColor:[colorHelper getColorFromHex:@"#FF9300" withAlpha:1]];
     UIAlertAction *contitueShopping = [UIAlertAction actionWithTitle:@"Back" style:UIAlertActionStyleDefault handler:actionHandler1];
-    UIAlertAction *goToCart = [UIAlertAction actionWithTitle:@"Go to cart" style:UIAlertActionStyleDefault handler:actionHandler2];
     [alert addAction:contitueShopping];
+    UIAlertAction *goToCart = [UIAlertAction actionWithTitle:@"Go to cart" style:UIAlertActionStyleDefault handler:actionHandler2];
     [alert addAction:goToCart];
     [target presentViewController:alert animated:YES completion:nil];
 }
 
-+(void)showSendEmailAlert:(NSString *)title body:(NSString *)body target:(UIViewController *)target handler:(void(^)(void))handler {
++(void)showSendEmailAlert:(NSString *)title body:(NSString *)body target:(UIViewController *)target actionHandler:(void(^)(void))actionHandler {
     UIAlertController * alert = [UIAlertController alertControllerWithTitle: @"Send order confirmation"
                                                                               message: @"Input your email"
                                                                        preferredStyle:UIAlertControllerStyleAlert];
@@ -49,16 +49,16 @@
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *sendConfirmation) {
-        if ([alert.textFields[0].text length] > 0) {
-            [backendless.messaging sendTextEmail:title body:body to:@[alert.textFields[0].text] response:^(MessageStatus *status) {
-                handler();
+        if ([alert.textFields.firstObject.text length] > 0) {
+            [backendless.messaging sendTextEmail:title body:body to:@[alert.textFields.firstObject.text] response:^(MessageStatus *status) {
+                actionHandler();
             } error:^(Fault *fault) {
-                [self showErrorAlert:false target:target handler:nil];
+                [self showErrorAlert:false target:target actionHandler:nil];
             }];
         }
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:confirmAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancelAction];
     [target presentViewController:alert animated:YES completion:nil];
 }
