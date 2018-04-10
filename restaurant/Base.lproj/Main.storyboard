@@ -614,7 +614,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="confirmButton" destination="68m-XE-gUF" id="Mpa-3J-ZBL"/>
-                        <segue destination="VH1-fB-e6C" kind="unwind" identifier="unwindToHomeVC" unwindAction="unwindToHomeVC:" id="Obl-gD-LyF"/>
+                        <segue destination="VH1-fB-e6C" kind="unwind" identifier="unwindToItemsVC" unwindAction="unwindToItemsVC:" id="5Jw-Ei-iFd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trN-af-JYH" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -169,8 +169,13 @@
                 itemOptions = [itemOptions stringByAppendingString:[NSString stringWithFormat:@"%@, ", option.name]];
             }
         }
-        itemOptions = [itemOptions substringToIndex:[itemOptions length] - 2];
-        emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@(%@) = %@ x $%.2f", item.menuItem.title, itemOptions, item.quantity, [item.price doubleValue]]];
+        if (itemOptions.length >= 2) {
+            itemOptions = [itemOptions substringToIndex:[itemOptions length] - 2];
+            emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@(%@) = %@ x $%.2f", item.menuItem.title, itemOptions, item.quantity, [item.price doubleValue]]];
+        }
+        else {
+            emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n• %@ = %@ x $%.2f", item.menuItem.title, item.quantity, [item.price doubleValue]]];
+        }
     }
     emailText = [emailText stringByAppendingString:[NSString stringWithFormat:@"\n----------\nTotal:$%.2f\n\nCustomers' info:", [shoppingCart.totalPrice doubleValue]]];
     
@@ -199,7 +204,7 @@
         [AlertViewController showSendEmailAlert:@"Order confirmation" body:emailText target:self actionHandler:^{
             [AlertViewController showAlertWithTitle:@"Order confirmation" message:@"Confirmation send" target:self actionHandler:^(UIAlertAction *action) {
                 [shoppingCart clearCart];
-                [self performSegueWithIdentifier:@"unwindToHomeVC" sender:nil];
+                [self performSegueWithIdentifier:@"unwindToItemsVC" sender:nil];
             }];
         }];
     }

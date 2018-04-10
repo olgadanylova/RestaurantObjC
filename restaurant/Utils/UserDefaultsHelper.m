@@ -249,17 +249,19 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)saveImageToUserDefaults:(UIImage *)image withKey:(NSString *)key { 
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:IMAGES_KEY];
-    NSMutableDictionary *images = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
-    if (!images) {
-        images = [NSMutableDictionary new];
-    }
-    if (![images objectForKey:key]) {
-        [images setObject:image forKey:key];
-        data = [NSKeyedArchiver archivedDataWithRootObject:images];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:IMAGES_KEY];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+-(void)saveImageToUserDefaults:(UIImage *)image withKey:(NSString *)key {
+    if (image) {
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:IMAGES_KEY];
+        NSMutableDictionary *images = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+        if (!images) {
+            images = [NSMutableDictionary new];
+        }
+        if (![images objectForKey:key]) {
+            [images setObject:image forKey:key];
+            data = [NSKeyedArchiver archivedDataWithRootObject:images];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:IMAGES_KEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 
